@@ -14,26 +14,26 @@
                             <div class="mb-3 col-md-4">
                                 <label class="form-label"> Schedule <span class="error">*</span></label>
                                 {{-- <input type="text" name="available_date" class="form-control" placeholder="Enter your available date" --}}
-                                <input type="date" name="available_date" class="form-control" placeholder="Enter your available date"
-                                       value="{{ old('available_date') }}">
-                                @error('available_date')
+                                <input type="text" name="title" class="form-control" placeholder="Enter your title here"
+                                       value="{{ old('title') }}">
+                                @error('title')
                                 <p class="error">{{ $message }}</p>
                                 @enderror
                             </div>
                             <div class="mb-3 col-md-4">
                                 <label class="form-label"> Start Time <span class="error">*</span></label>
                                 {{-- <input type="text" name="available_date" class="form-control" placeholder="Enter your available date" --}}
-                                <input type="time" name="start_time" class="form-control" placeholder="Enter your start time"
-                                       value="{{ old('start_time') }}">
-                                @error('start_time')
+                                <input type="time" name="start" class="form-control" placeholder="Enter your start time"
+                                       value="{{ old('start') }}">
+                                @error('start')
                                 <p class="error">{{ $message }}</p>
                                 @enderror
                             </div>
                             <div class="mb-3 col-md-4">
-                                <label class="form-label"> End Time <span class="error">*</span></label>
+                                <label class="form-label"> End <span class="error">*</span></label>
                                 {{-- <input type="text" name="available_date" class="form-control" placeholder="Enter your available date" --}}
-                                <input type="time" name="end_time" class="form-control" placeholder="Enter your end time"
-                                       value="{{ old('end_time') }}">
+                                <input type="time" name="end" class="form-control" placeholder="Enter your end time"
+                                       value="{{ old('end') }}">
                                 @error('end_time')
                                 <p class="error">{{ $message }}</p>
                                 @enderror

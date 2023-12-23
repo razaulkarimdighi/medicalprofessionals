@@ -27,7 +27,6 @@ class AssignAnesthesiologistController extends Controller
     {
 
          set_page_meta('Assignment');
-        //return response()->json(["assign" => $assign]);
         return view('admin.assign_anesthesiologists.index');
     }
 
@@ -104,18 +103,6 @@ class AssignAnesthesiologistController extends Controller
     }
 
     //get all assignment
-    public function getAllAssignment(){
-        $assignments = Assignment::all();
-
-        $data = [
-            'status'=>200,
-            'message'   => 'Successfully fetch',
-            'events'=> $assignments,
-        ];
-        // dd($data);
-
-        return response()->json($data);
-    }
 
 
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\DataTables\ScheduleDataTable;
 use App\Http\Requests\ScheduleRequest;
+use App\Models\Schedule;
 use App\Services\ScheduleService;
 use Illuminate\Support\Facades\Auth;
 
@@ -41,9 +42,10 @@ class ScheduleController extends Controller
     {
         $data = $request->validated();
         $data['user_id'] = Auth::user()->id;
+        $this->scheduleService->storeOrUpdate($data, null);
+        record_created_flash();
         try {
-            $this->scheduleService->storeOrUpdate($data, null);
-            record_created_flash();
+
         } catch (\Exception $e) {
         }
         return redirect()->route('admin.schedules.index');
