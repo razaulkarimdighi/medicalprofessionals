@@ -26,8 +26,6 @@ class AssignAnesthesiologistController extends Controller
     public function index()
     {
 
-         set_page_meta('Assignment');
-        return view('admin.assign_anesthesiologists.index');
     }
 
     /**
@@ -43,12 +41,13 @@ class AssignAnesthesiologistController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
-        $assignment = $this->assignAnesthesiologistService->storeOrUpdate($data, null);
+
         try {
 
+            $data = $request->all();
+            $assignment = $this->assignAnesthesiologistService->storeOrUpdate($data, null);
             if($assignment){
-                $schedule = Schedule::where('user_id','=',$assignment->anesthesiologist_id)->where('available_date','=',$assignment->assignment_date)->first();
+                $schedule = Schedule::where('user_id','=',$assignment->anesthesiologist_id)->first();
                 $schedule->status = "assigned";
                 $schedule->save();
                 record_created_flash();

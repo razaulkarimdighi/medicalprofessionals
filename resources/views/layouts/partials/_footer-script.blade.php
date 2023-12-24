@@ -17,8 +17,9 @@
 <script src="{{ asset('admin/js/custom-dev.js') }}"></script>
 <script src="{{ asset('js/app.js') }}"></script>
 
-
 <script>
+
+
     toastr.options =
     {
         "closeButton": true,

@@ -10,7 +10,7 @@
                     <form action="{{ route('admin.assign_anesthesiologists.store') }}" method="post">
                         @csrf
                             <div class="row mb-2">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label class="form-label">Select Anesthesiologist <span class="error">*</span></label>
 
                                     <input type="hidden" name="practicioner_id" value="{{ $practicioner_id }}">
@@ -25,21 +25,42 @@
                                     @enderror
                                 </div>
 
-                                <div class="col-md-6">
-                                    <label class="form-label">Schedules<span class="error">*</span></label>
+                                <div class="col-md-4">
+                                    <label class="form-label">Start<span class="error">*</span></label>
 
 
-                                    <select id="schedule" class="form-control Programme" name="assignment_date">
+                                    <select id="schedule" class="form-control Programme" name="start">
                                         <option value="0" disabled>Select Schedule</option>
                                         @foreach ($schedules as $schedule)
-                                        <option value="{{ $schedule->available_date }}">{{ $schedule->available_date }}</option>
+                                        <option value="{{ $schedule->start }}">{{ $schedule->start }}</option>
                                         @endforeach
                                     </select>
 
-                                    @error('assignment_date')
+                                    @error('start')
                                     <p class="error">{{ $message }}</p>
                                     @enderror
                                 </div>
+
+                                <div class="col-md-4">
+                                    <label class="form-label">End Time<span class="error">*</span></label>
+
+
+                                    <select id="schedule" class="form-control Programme" name="end">
+                                        <option value="0" disabled>End Time</option>
+                                        @foreach ($schedules as $schedule)
+                                        <option value="{{ $schedule->end }}">{{ $schedule->end }}</option>
+                                        @endforeach
+                                    </select>
+
+                                    @error('end')
+                                    <p class="error">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
+
+
+
+
 
                             </div>
                         <div class="row">

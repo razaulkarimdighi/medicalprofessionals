@@ -1,18 +1,16 @@
-@extends('layouts.master')
+{{-- @extends('layouts.master')
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-12">
+    <div class="row">
+        <div class="col-sm-12">
             <div class="card">
-                <div class="card-header">Schedules</div>
                 <div class="card-body">
-
+                    <div class="d-flex justify-content-between">
+                        <h4 class="card-title mb-3">Assignment</h4>
+                    </div>
+                    {!! $dataTable->table(['class'=>'table-responsive']) !!}
                 </div>
             </div>
         </div>
     </div>
-</div>
-@endsection
 
-
-
+@endsection --}}

@@ -98,7 +98,6 @@ class ScheduleDataTable extends DataTable
 
         return [
 //            Column::computed('DT_RowIndex', 'SL#'),
-            Column::make('title', 'title')->title('title'),
             Column::make('start', 'start')->title('Start'),
             Column::make('end', 'end')->title('End'),
         ];

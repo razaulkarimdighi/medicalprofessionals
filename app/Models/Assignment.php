@@ -12,7 +12,8 @@ class Assignment extends Model
     protected $fillable = [
         'anesthesiologist_id',
         'practicioner_id',
-        'assignment_date'
+        'start',
+        'end'
     ];
 
     public function practicioner()

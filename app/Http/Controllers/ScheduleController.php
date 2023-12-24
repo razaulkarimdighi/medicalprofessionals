@@ -8,6 +8,7 @@ use App\Http\Requests\ScheduleRequest;
 use App\Models\Schedule;
 use App\Services\ScheduleService;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class ScheduleController extends Controller
 {
@@ -42,9 +43,9 @@ class ScheduleController extends Controller
     {
         $data = $request->validated();
         $data['user_id'] = Auth::user()->id;
+        try {
         $this->scheduleService->storeOrUpdate($data, null);
         record_created_flash();
-        try {
 
         } catch (\Exception $e) {
         }
@@ -102,5 +103,23 @@ class ScheduleController extends Controller
         } catch (\Exception $e) {
             return back();
         }
+    }
+
+
+    //Show all schedule to admin;
+    public function showAllSchedule(){
+        $events = Array();
+        $schedules = Schedule::all();
+        foreach($schedules as $schedule){
+            $events[]=[
+                      'title' => $schedule->user->first_name.' '.$schedule->user->last_name,
+                      'start' => $schedule->start,
+                      'end' => $schedule->end
+                    ];
+        }
+
+
+        set_page_meta('Schedule');
+        return view('admin.schedule.index', ['events' => $events]);
     }
 }

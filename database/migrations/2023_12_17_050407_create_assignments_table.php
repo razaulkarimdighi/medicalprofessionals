@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('anesthesiologist_id');
             $table->foreignId('practicioner_id');
-            $table->string('assignment_date');
+            $table->dateTime('start');
+            $table->dateTime('end');
             $table->string('status')->nullable();
             $table->timestamps();
         });

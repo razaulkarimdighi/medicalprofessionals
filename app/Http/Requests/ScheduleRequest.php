@@ -22,7 +22,6 @@ class ScheduleRequest extends FormRequest
     public function rules()
     {
         $rules =  [
-            'title' => ['required'],
             'start' => ['required'],
             'end' => ['required'],
         ];

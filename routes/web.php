@@ -8,6 +8,8 @@ use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\Admin\Anesthesiologist\AnesthesiologistController;
 use App\Http\Controllers\Admin\Assign_Anesthesiologist\AssignAnesthesiologistController;
 use App\Http\Controllers\Admin\Medical_Practitioner\MedicalPractitionerController;
+use App\Models\Schedule;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,6 +37,10 @@ Route::prefix('admin')->as('admin.')->group(function () {
     Route::resource('users', UsersController::class);
     //SCHEDULE
     Route::resource('schedules', ScheduleController::class);
+
+    //All Schedules to show admin
+    Route::get('/get/all/schedule/to/show', [ScheduleController::class,'showAllSchedule'])->name('get.all.schedule');
+
     //Anesthesiologists
     Route::resource('anesthesiologists', AnesthesiologistController::class);
      //Assign Anesthesiologists

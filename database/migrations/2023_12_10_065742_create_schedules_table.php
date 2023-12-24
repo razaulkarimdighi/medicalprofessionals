@@ -14,9 +14,8 @@ return new class extends Migration
         Schema::create('schedules', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->nullable();
-            $table->string('title');
-            $table->time('start');
-            $table->time('end');
+            $table->dateTime('start');
+            $table->dateTime('end');
             $table->string('status')->default('not_assigned');
             $table->timestamps();
         });
