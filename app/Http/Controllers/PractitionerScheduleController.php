@@ -3,28 +3,28 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\DataTables\ScheduleDataTable;
+use App\DataTables\PractitionerScheduleDataTable;
 use App\Http\Requests\ScheduleRequest;
 use App\Models\Schedule;
-use App\Services\ScheduleService;
+use App\Services\PractitionerScheduleService;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
-class ScheduleController extends Controller
+class PractitionerScheduleController extends Controller
 {
     protected $scheduleService;
 
-    public function __construct(ScheduleService $scheduleService)
+    public function __construct(PractitionerScheduleService $scheduleService)
     {
         $this->scheduleService = $scheduleService;
     }
     /**
      * Display a listing of the resource.
      */
-    public function index(ScheduleDataTable $dataTable)
+    public function index(PractitionerScheduleDataTable $dataTable)
     {
         set_page_meta('Schedule');
-        return $dataTable->render('anesthesiologist.index');
+        return $dataTable->render('medical_practitioners.index');
     }
 
     /**

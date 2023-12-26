@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\Profile\UserProfileController;
 use App\Http\Controllers\Admin\User\UsersController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PractitionerScheduleController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\Admin\Anesthesiologist\AnesthesiologistController;
@@ -37,6 +38,8 @@ Route::prefix('admin')->as('admin.')->group(function () {
     Route::resource('users', UsersController::class);
     //SCHEDULE
     Route::resource('schedules', ScheduleController::class);
+    //Practitioner Schedule
+    Route::resource('all/medical-practitioner/schedules/', PractitionerScheduleController::class);
 
     //All Schedules to show admin
     Route::get('/get/all/schedule/to/show', [ScheduleController::class,'showAllSchedule'])->name('get.all.schedule');

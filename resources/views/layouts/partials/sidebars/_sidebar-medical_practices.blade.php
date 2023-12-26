@@ -13,6 +13,11 @@
                         <i class="fa fa-home"></i><span> Dashboard </span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('admin.index') }}" class="waves-effect">
+                        <i class="fa fa-home"></i><span> Schedule </span>
+                    </a>
+                </li>
 
             </ul>
         </div>

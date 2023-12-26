@@ -7,9 +7,8 @@
                 <div class="card-body">
                     <h4 class="card-title mb-3">{{get_page_meta('title', true)}}</h4>
 
-                    <form action="{{ route('admin.schedules.update',$schedule->id) }}" method="post">
+                    <form action="{{ route('admin.store') }}" method="post">
                         @csrf
-                        @method('PUT')
 
                         <div class="row">
                             <div class="mb-3 col-md-4">
