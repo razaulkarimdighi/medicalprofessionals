@@ -46,6 +46,13 @@
                         <i class="fa fa-home"></i><span> All Schedules </span>
                     </a>
                 </li>
+
+                <li>
+                    <a href="{{ route('admin.assign_anesthesiologists.index') }}" class="waves-effect">
+                        <i class="fa fa-home"></i><span> Assignments </span>
+                    </a>
+                </li>
+
             </ul>
         </div>
         <!-- Sidebar -->

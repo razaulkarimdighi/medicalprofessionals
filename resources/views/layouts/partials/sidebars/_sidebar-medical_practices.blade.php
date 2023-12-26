@@ -7,15 +7,9 @@
             <!-- Left Menu Start -->
             <ul class="metismenu list-unstyled" id="side-menu">
                 <li class="menu-title">Main</li>
-
-                <li>
-                    <a href="{{ route('admin.assign_anesthesiologists.index') }}" class="waves-effect">
-                        <i class="fa fa-home"></i><span> Dashboard </span>
-                    </a>
-                </li>
                 <li>
                     <a href="{{ route('admin.index') }}" class="waves-effect">
-                        <i class="fa fa-home"></i><span> Schedule </span>
+                        <i class="fa fa-home"></i><span> Dashboard </span>
                     </a>
                 </li>
 
