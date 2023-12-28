@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
                 'first_name'        => 'Supper',
                 'last_name'         => 'Admin',
                 'email'             => 'admin@app.com',
-                'address'             => 'address',
+                'location'             => 'address',
                 'email_verified_at' => now(),
                 'password'          => Hash::make("12345678"),   // 12345678
                 'user_type'         => User::USER_TYPE_ADMIN,
@@ -33,7 +33,7 @@ class UserSeeder extends Seeder
                 'first_name'        => 'Medical Practices',
                 'last_name'         => 'Last',
                 'email'             => 'medical@app.com',
-                'address'             => 'address',
+                'location'             => 'address',
                 'email_verified_at' => now(),
                 'password'          => Hash::make("12345678"),   // 12345678
                 'user_type'         => User::USER_TYPE_MEDICAL_PRACTICES,
@@ -45,7 +45,7 @@ class UserSeeder extends Seeder
                 'first_name'        => 'Anestheiologist',
                 'last_name'         => 'Last',
                 'email'             => 'anestheiologist@app.com',
-                'address'           => 'address',
+                'location'           => 'address',
                 'email_verified_at' => now(),
                 'password'          => Hash::make("12345678"),   // 12345678
                 'user_type'         => User::USER_TYPE_ANESTHEIOLOGISTS,
@@ -53,7 +53,7 @@ class UserSeeder extends Seeder
                 'remember_token'    => Str::random(60),
                 'phone'             => '012345678910',
             ],
-         
+
         ];
 
 

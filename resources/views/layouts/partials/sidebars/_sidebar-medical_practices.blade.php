@@ -12,7 +12,11 @@
                         <i class="fa fa-home"></i><span> Dashboard </span>
                     </a>
                 </li>
-
+                <li>
+                    <a href="{{ route('admin.show.assignment.to.practitioner') }}" class="waves-effect">
+                        <i class="fa fa-home"></i><span> Assignments </span>
+                    </a>
+                </li>
             </ul>
         </div>
         <!-- Sidebar -->

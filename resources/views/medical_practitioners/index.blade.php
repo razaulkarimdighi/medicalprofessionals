@@ -7,7 +7,6 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <h4 class="card-title mb-3">Schedules</h4>
-                        <a href="{{route('admin.create')}}" class="btn btn-sm btn-primary text-capitalize" style="padding-top: 8px;">Create Schedule</a>
                     </div>
                     {!! $dataTable->table(['class'=>'table-responsive']) !!}
                 </div>
@@ -16,11 +15,9 @@
     </div>
 
 @endsection
-
 @push('style')
     @include('includes.styles.datatable')
 @endpush
-
 @push('script')
     @include('includes.scripts.datatable')
 @endpush

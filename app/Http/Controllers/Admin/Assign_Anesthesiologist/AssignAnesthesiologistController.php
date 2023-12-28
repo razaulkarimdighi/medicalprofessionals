@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Admin\Assign_Anesthesiologist;
 
+use App\DataTables\ShowAssignmentToAnesthesiologistDataTable;
+use App\DataTables\ShowAssignmentToPractitionersDataTable;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\DataTables\AssignAnesthesiologistDataTable;
-use App\DataTables\ShowAssignDateToAnesthesiologist;
 use App\Services\AssignAnesthesiologistService;
 use App\Models\Assignment;
 use App\Models\User;
@@ -26,7 +27,8 @@ class AssignAnesthesiologistController extends Controller
     public function index(AssignAnesthesiologistDataTable $dataTable)
     {
 
-
+        set_page_meta('Assignments');
+        return $dataTable->render('admin.assign_anesthesiologists.index');
 
     }
 
@@ -103,7 +105,29 @@ class AssignAnesthesiologistController extends Controller
         return view('admin.assign_anesthesiologists.create', compact('anesthesiologists','schedules', 'practicioner_id'));
     }
 
-    //get all assignment
+    //Show assignment to practitioner
+
+    public function showAssignmentToPractitioners(ShowAssignmentToPractitionersDataTable $dataTable){
+
+        set_page_meta('Assignments');
+        return $dataTable->render('medical_practitioners.assignment');
+
+    }
+
+
+    //Show assignment to Anesthesiologist
+
+    public function showAssignmentToAnesthesiologist(ShowAssignmentToAnesthesiologistDataTable $dataTable){
+
+        set_page_meta('Assignments');
+        return $dataTable->render('anesthesiologist.assignment');
+
+    }
+
+
+
+
+
 
 
 }

@@ -18,19 +18,18 @@ return new class extends Migration
             $table->string('first_name')->index()->nullable();
             // $table->string('middle_name')->index()->nullable();
             $table->string('last_name')->index()->nullable();
-            $table->string('address')->nullable();
+            $table->string('location')->nullable();
+            //$table->string('honorary_note')->nullable();
             $table->string('phone', 25)->index()->nullable();
             $table->string('email')->index()->unique();
-            // $table->string('date_of_hire')->nullable();
-            // $table->string('department')->nullable();
             $table->string('password');
             $table->string('avatar')->nullable();
             $table->string('permission')->default('pending');
             $table->string('status')->default('active');
             $table->string('user_type', 50)->index()->default(User::USER_TYPE_ADMIN);
+            $table->string('anesthesiologist_type', 50)->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
-            // $table->string('status', 50)->index()->default(GlobalConstant::STATUS_INACTIVE);
             $table->timestamps();
 
         });

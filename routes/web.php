@@ -51,6 +51,12 @@ Route::prefix('admin')->as('admin.')->group(function () {
     //All Assignment Data
     Route::get('/assign_anesthesiologist/all/assignment', [AssignAnesthesiologistController::class, 'getAllAssignment'])->name('allassignment');
 
+     //Show assignment to practitioner
+     Route::get('/show/assignment/to/practitoner', [AssignAnesthesiologistController::class, 'showAssignmentToPractitioners'])->name('show.assignment.to.practitioner');
+
+     //Show assignment to Anethesiologist
+     Route::get('/show/assignment/to/anesthesiologist', [AssignAnesthesiologistController::class, 'showAssignmentToAnesthesiologist'])->name('show.assignment.to.anesthesiologist');
+
     //Create Anesthesiologists with data
     Route::get('/assign/anesthesiologist/create/{id}', [AssignAnesthesiologistController::class,'getAnesthesiologist'])->name('assign.anesthesiologist');
 

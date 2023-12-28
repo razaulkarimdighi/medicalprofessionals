@@ -50,17 +50,17 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'first_name' => ['required', 'string', 'max:255'],
-            'last_name' => ['required', 'string', 'max:255'],
-            'address' => ['required', 'string'],
-            'phone' => ['required', 'string'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'user_type' => ['required', 'string'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+             'first_name' => ['required', 'string', 'max:255'],
+             'last_name' => ['required', 'string', 'max:255'],
+             'location' => ['required', 'string'],
+             'phone' => ['required', 'string'],
+             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+             'user_type' => ['required', 'string'],
+             //'honorary_note' => ['required', 'mimes:pdf,png,jpg,jpeg','max:2048'],
+             'anesthesiologist_type' => ['required', 'string'],
+             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
 
-
-    
     }
 
     /**
@@ -74,10 +74,12 @@ class RegisterController extends Controller
         return User::create([
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
-            'address' => $data['address'],
+            'location' => $data['location'],
             'phone' => $data['phone'],
             'email' => $data['email'],
+            //'honorary_note' => $data['honorary_note'],
             'user_type' => $data['user_type'],
+            'anesthesiologist_type' => $data['anesthesiologist_type'],
             'password' => Hash::make($data['password']),
         ]);
     }

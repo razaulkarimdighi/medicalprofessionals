@@ -27,10 +27,11 @@ class User extends Authenticatable
     protected $fillable = [
         'first_name',
         'last_name',
-        'address',
+        'location',
         'email',
         'phone',
         'user_type',
+        'anesthesiologist_type',
         'permission',
         'password',
         'avatar',
