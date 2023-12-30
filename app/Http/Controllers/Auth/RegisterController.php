@@ -5,12 +5,20 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Services\Utils\FileUploadService;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
+    protected $fileUploadService;
+
+    public function __construct(FileUploadService $fileUploadService)
+    {
+        $this->fileUploadService = $fileUploadService;
+    }
     /*
     |--------------------------------------------------------------------------
     | Register Controller
@@ -49,17 +57,19 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
-             'first_name' => ['required', 'string', 'max:255'],
-             'last_name' => ['required', 'string', 'max:255'],
-             'location' => ['required', 'string'],
-             'phone' => ['required', 'string'],
-             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-             'user_type' => ['required', 'string'],
-             //'honorary_note' => ['required', 'mimes:pdf,png,jpg,jpeg','max:2048'],
-             'anesthesiologist_type' => ['required', 'string'],
-             'password' => ['required', 'string', 'min:8', 'confirmed'],
+
+         return Validator::make($data, [
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'location' => ['required', 'string'],
+            'phone' => ['required', 'string'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'user_type' => ['required', 'string'],
+            'honorary_note' => ['required', 'mimes:pdf'],
+            "anesthesiologist_type" => "required_if:user_type,==,anesthesiologists",
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
+
 
     }
 
@@ -71,16 +81,43 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'first_name' => $data['first_name'],
-            'last_name' => $data['last_name'],
-            'location' => $data['location'],
-            'phone' => $data['phone'],
-            'email' => $data['email'],
-            //'honorary_note' => $data['honorary_note'],
-            'user_type' => $data['user_type'],
-            'anesthesiologist_type' => $data['anesthesiologist_type'],
-            'password' => Hash::make($data['password']),
-        ]);
+
+        if($data['user_type'] == User::USER_TYPE_MEDICAL_PRACTICES){
+            $user = User::create([
+                'first_name' => $data['first_name'],
+                'last_name' => $data['last_name'],
+                'location' => $data['location'],
+                'phone' => $data['phone'],
+                'email' => $data['email'],
+                'honorary_note' => 'image',
+                'user_type' => $data['user_type'],
+                'password' => Hash::make($data['password']),
+            ]);
+
+            if ($user) {
+                $image = $this->fileUploadService->upload($data['honorary_note'], User::FILE_STORE_HONORARY_PATH, false, true);
+                $user->honorary_note = $image;
+                $user->save();
+            }
+
+             return $user;
+
+
+        }else{
+            return User::create([
+                'first_name' => $data['first_name'],
+                'last_name' => $data['last_name'],
+                'location' => $data['location'],
+                'phone' => $data['phone'],
+                'email' => $data['email'],
+                'honorary_note' => 'image',
+                'user_type' => $data['user_type'],
+                'anesthesiologist_type' =>   $data['anesthesiologist_type'],
+                'password' => Hash::make($data['password']),
+            ]);
+        }
+
+
+
     }
 }

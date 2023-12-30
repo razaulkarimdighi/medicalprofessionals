@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 @include('frontend.partials._head')
+@stack('style')
 <body>
 
 
@@ -14,7 +15,7 @@
 
 
    @yield('banner')
- 
+
 
     @include('frontend.partials._footer')
 
@@ -23,5 +24,6 @@
 
     <!-- JavaScript Libraries -->
  @include('frontend.partials._footer_script')
+ @stack('script')
 </body>
 </html>

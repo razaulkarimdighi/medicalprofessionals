@@ -1,55 +1,6 @@
 @extends('frontend.master')
 
 @section('banner')
-    <style>
-        .hero_image {
-            background-size: cover;
-            background-position: top;
-            position: relative;
-            height: 100vh;
-
-        }
-
-        .hero_image h1 {
-            color: white;
-            text-shadow: 2px 2px 2px rgba(0, 0, 0, .2);
-            font-size: 50px;
-
-        }
-
-        .hero_image .color_overlay {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-color: rgb(0%, 0%, 100%, 0.2)
-        }
-
-        .hero_image .btn {
-            background: #0463FA;
-        }
-    </style>
-
-    {{-- <script>
-        $(document).ready(function() {
-
-            $("#anesthesiologist_type").hide();
-
-
-            $("#user_type").on("change", function() {
-                var user_type = $(this).val();
-
-                if (user_type == "anesthesiologists") {
-                    $("#anesthesiologist_type").show(200);
-                } else {
-                    $("#anesthesiologist_type").hide(200);
-                }
-
-            });
-
-        });
-    </script> --}}
-
-
     <div class="container-fluid p-0 m-0">
         <div class="hero_image" style="background-image: url({{ asset('frontend/img/doctor.jpg') }})">
             <div class="color_overlay d-flex justify-content-center align-items-center flex-column">
@@ -145,7 +96,7 @@
                                 </div>
                             </div>
 
-                            {{-- <div class="row mb-2">
+                            <div class="row mb-2">
                                 <label for="honorary_note"
                                     class="col-md-4 col-form-label text-md-end">{{ __('Honorary Note') }}</label>
 
@@ -160,7 +111,7 @@
                                         </span>
                                     @enderror
                                 </div>
-                            </div> --}}
+                            </div>
 
 
                             <div class="row mb-2">
@@ -197,9 +148,12 @@
                                     <select class="form-select" name="anesthesiologist_type"
                                         aria-label="Default select example">
                                         <option selected disabled>Select One</option>
-                                        <option class="text-capitalize" value="Anesthesiologist Type One"> Anesthesiologist Type One </option>
-                                        <option class="text-capitalize" value="Anesthesiologist Type Two"> Anesthesiologist Type Two </option>
-                                        <option class="text-capitalize" value="Anesthesiologist Type Three"> Anesthesiologist Type Three
+                                        <option class="text-capitalize" value="Anesthesiologist Type One"> Anesthesiologist
+                                            Type One </option>
+                                        <option class="text-capitalize" value="Anesthesiologist Type Two"> Anesthesiologist
+                                            Type Two </option>
+                                        <option class="text-capitalize" value="Anesthesiologist Type Three">
+                                            Anesthesiologist Type Three
                                         </option>
                                     </select>
                                     @error('user_type')
@@ -257,9 +211,53 @@
         </div>
     </div>
 @endsection
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+@push('style')
+    <style>
+        .hero_image {
+            background-size: cover;
+            background-position: top;
+            position: relative;
+            height: 100vh;
+
+        }
+
+        .hero_image h1 {
+            color: white;
+            text-shadow: 2px 2px 2px rgba(0, 0, 0, .2);
+            font-size: 50px;
+
+        }
+
+        .hero_image .color_overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: rgb(0%, 0%, 100%, 0.2)
+        }
+
+        .hero_image .btn {
+            background: #0463FA;
+        }
+    </style>
+@endpush
 @push('script')
     <script>
+        $(document).ready(function() {
 
+            $("#anesthesiologist_type").hide();
+
+
+            $("#user_type").on("change", function() {
+                var user_type = $(this).val();
+
+                if (user_type == "anesthesiologists") {
+                    $("#anesthesiologist_type").show(200);
+                } else {
+                    $("#anesthesiologist_type").hide(200);
+                }
+
+            });
+
+        });
     </script>
-@endpush
+    @endpush

@@ -19,7 +19,7 @@ return new class extends Migration
             // $table->string('middle_name')->index()->nullable();
             $table->string('last_name')->index()->nullable();
             $table->string('location')->nullable();
-            //$table->string('honorary_note')->nullable();
+            $table->string('honorary_note')->nullable();
             $table->string('phone', 25)->index()->nullable();
             $table->string('email')->index()->unique();
             $table->string('password');

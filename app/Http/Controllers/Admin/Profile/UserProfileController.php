@@ -27,11 +27,9 @@ class UserProfileController extends Controller
         $data = $request->validate(
             [
                 'first_name'    => 'required|string|max:50',
-                'middle_name'   => 'nullable|string|max:50',
                 'last_name'     => 'required|string|max:50',
                 'phone'         => 'required|string|max:16',
                 'email'         => "required|email|unique:users,email,$id",
-                'date_of_hire' => 'required',
             ],
             [
                 'first_name.required'    => 'First Name is Required!',

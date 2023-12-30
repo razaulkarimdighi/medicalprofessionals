@@ -5,6 +5,7 @@ namespace App\DataTables;
 use App\Models\User;
 use App\Models\Assignment;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
@@ -15,7 +16,7 @@ use Yajra\DataTables\Services\DataTable;
 
 class ShowAssignmentToAnesthesiologistDataTable  extends DataTable
 {
-   /**
+    /**
      * Build the DataTable class.
      *
      * @param QueryBuilder $query Results from query() method.
@@ -41,17 +42,10 @@ class ShowAssignmentToAnesthesiologistDataTable  extends DataTable
             //     </div>
             //     </div>';
             // })
-             ->editColumn('practicioner_id', function ($item) {
-                 $first_name = $item->practicioner->first_name;
-                 $last_name = $item->practicioner->last_name;
-
-                 return $first_name.' '.$last_name;
-             })
-             ->editColumn('anesthesiologist_id', function ($item) {
-                $first_name = $item->anesthesiologist->first_name;
-                $last_name = $item->anesthesiologist->last_name;
-
-                return $first_name.' '.$last_name;
+            ->editColumn('practicioner_id', function ($item) {
+                $first_name = $item->practicioner->first_name;
+                $last_name = $item->practicioner->last_name;
+                return $first_name . ' ' . $last_name;
             })
             //->editColumn('status',function ($item){
             //     $badge = $item->status == GlobalConstant::STATUS_ACTIVE ? "bg-success" : "bg-danger";
@@ -62,8 +56,8 @@ class ShowAssignmentToAnesthesiologistDataTable  extends DataTable
             //     $sql = "CONCAT(users.first_name,'-',users.last_name)  like ?";
             //     $query->whereRaw($sql, ["%{$keyword}%"]);
             //  })
-            ->rawColumns(['action', 'practicioner_id','anesthesiologist_id']);
-            // ->setRowId('id');
+            ->rawColumns(['action', 'practicioner_id', 'anesthesiologist_id']);
+        // ->setRowId('id');
 
     }
 
@@ -72,7 +66,7 @@ class ShowAssignmentToAnesthesiologistDataTable  extends DataTable
      */
     public function query(Assignment $model): QueryBuilder
     {
-        return $model->newQuery()->orderBy('id', 'DESC')->select('assignments.*');
+        return $model->newQuery()->where('anesthesiologist_id', '=', Auth::user()->id)->orderBy('id', 'DESC')->select('assignments.*');
     }
 
     /**
@@ -81,13 +75,13 @@ class ShowAssignmentToAnesthesiologistDataTable  extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('assignment-table')
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
-                    //->dom('Bfrtip')
-                    ->orderBy(1)
-                    ->selectStyleSingle();
-                    //->addAction(['width' => '55px', 'class' => 'text-center', 'printable' => false, 'exportable' => false, 'title' => 'Action']);
+            ->setTableId('assignment-table')
+            ->columns($this->getColumns())
+            ->minifiedAjax()
+            //->dom('Bfrtip')
+            ->orderBy(1)
+            ->selectStyleSingle();
+        //->addAction(['width' => '55px', 'class' => 'text-center', 'printable' => false, 'exportable' => false, 'title' => 'Action']);
 
     }
 
@@ -98,11 +92,10 @@ class ShowAssignmentToAnesthesiologistDataTable  extends DataTable
     {
 
         return [
-//            Column::computed('DT_RowIndex', 'SL#'),
-Column::make('practicioner_id', 'practicioner_id')->title('Practitioner'),
-Column::make('anesthesiologist_id', 'anesthesiologist_id')->title('Anesthesiologist'),
-Column::make('start', 'start')->title('Start Time'),
-Column::make('end', 'end')->title('End Time'),
+            //            Column::computed('DT_RowIndex', 'SL#'),
+            Column::make('practicioner_id', 'practicioner_id')->title('Practitioner'),
+            Column::make('start', 'start')->title('Start Time'),
+            Column::make('end', 'end')->title('End Time'),
         ];
     }
 
@@ -113,5 +106,4 @@ Column::make('end', 'end')->title('End Time'),
     {
         return 'Assignment_' . date('YmdHis');
     }
-
 }

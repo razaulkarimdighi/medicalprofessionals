@@ -5,7 +5,7 @@
     <div class="mb-5">
         <div class="row">
             <div class="col-xl-4 col-md-6">
-                <div class="card mini-stat bg-primary text-white">
+                <div class="card mini-stat bg-light text-dark">
                     <div class="card-body">
                         <div class="mb-4">
                             <h5 class="font-size-16 text-uppercase ">
@@ -18,7 +18,7 @@
                 </div>
             </div>
             <div class="col-xl-4 col-md-6">
-                <div class="card mini-stat bg-primary text-white">
+                <div class="card mini-stat bg-light text-dark">
                     <div class="card-body">
                         <div class="mb-4">
                             <h5 class="font-size-16 text-uppercase ">
@@ -31,7 +31,7 @@
                 </div>
             </div>
             <div class="col-xl-4 col-md-6">
-                <div class="card mini-stat bg-primary text-white">
+                <div class="card mini-stat bg-light text-dark">
                     <div class="card-body">
                         <div class="mb-4">
                             <h5 class="font-size-16 text-uppercase ">
@@ -88,6 +88,9 @@
             font-size: 12px;
             color: #ffffff;
         }
+        .fc-unthemed td.fc-today {
+            background: #f8f8f8;
+        }
     </style>
 @endpush
 
@@ -105,11 +108,11 @@
             var events = @json($events);
             $('#calendar').fullCalendar({
                 plugins: ['interaction', 'dayGrid', 'timeGrid'],
-                defaultView: 'basicWeek',
+                defaultView: 'agendaDay',
                 aspectRatio: 1.5,
                 editable: false,
                 header: {
-                    left: '',
+                    left: 'month, basicWeek, agendaDay',
                     center: 'title',
                     right: 'prev,next today',
 

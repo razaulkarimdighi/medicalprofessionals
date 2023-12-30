@@ -13,6 +13,7 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
     public const FILE_STORE_PATH = 'users_avatar';
+    public const FILE_STORE_HONORARY_PATH = 'honorary';
     public const USER_TYPE_ADMIN    = 'admin';
     public const USER_TYPE_MEDICAL_PRACTICES    = 'medical_practices';
     public const USER_TYPE_ANESTHEIOLOGISTS    = 'anesthesiologists';
@@ -28,6 +29,7 @@ class User extends Authenticatable
         'first_name',
         'last_name',
         'location',
+        'honorary_note',
         'email',
         'phone',
         'user_type',
