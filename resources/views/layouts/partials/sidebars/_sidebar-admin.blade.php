@@ -9,7 +9,7 @@
                 <li class="menu-title">Main</li>
 
                 <li>
-                    <a href="#" class="waves-effect">
+                    <a href="{{ route('home') }}" class="waves-effect">
                         <i class="fa fa-home"></i><span> Dashboard </span>
                     </a>
                 </li>
@@ -32,24 +32,24 @@
                 </li>
                 <li>
                     <a href="{{ route('admin.anesthesiologists.index') }}" class="waves-effect">
-                        <i class="fa fa-home"></i><span> Anesthesiologists </span>
+                        <i class="fa fa-medkit" aria-hidden="true"></i> Anesthesiologists </span>
                     </a>
                 </li>
                 <li>
                     <a href="{{ route('admin.medical_practitioners.index') }}" class="waves-effect">
-                        <i class="fa fa-home"></i><span> Medical Practitioners </span>
+                        <i class="fa fa-user-md" aria-hidden="true"></i><span> Medical Practitioners </span>
                     </a>
                 </li>
 
-                <li>
+                {{-- <li>
                     <a href="{{ route('admin.get.all.schedule') }}" class="waves-effect">
-                        <i class="fa fa-home"></i><span> All Schedules </span>
+                        <i class="fa fa-calendar" aria-hidden="true"></i><span> All Schedules </span>
                     </a>
-                </li>
+                </li> --}}
 
                 <li>
                     <a href="{{ route('admin.assign_anesthesiologists.index') }}" class="waves-effect">
-                        <i class="fa fa-home"></i><span> Assignments </span>
+                        <i class="fa fa-check" aria-hidden="true"></i> Assignments </span>
                     </a>
                 </li>
 

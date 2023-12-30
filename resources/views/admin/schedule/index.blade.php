@@ -30,30 +30,30 @@
 </style>
 
 
-  <script>
-$(document).ready(function(){
-    var events = @json($events);
-    $('#calendar').fullCalendar({
-        plugins: ['interaction', 'dayGrid', 'timeGrid'],
-        defaultView: 'basicWeek',
-        aspectRatio: 1.5,
-        editable:false,
-        header:{
-        left:'',
-        center:'title',
-        right:'prev,next today',
+<script>
+    $(document).ready(function(){
+        var events = @json($events);
+        $('#calendar').fullCalendar({
+            plugins: ['interaction', 'dayGrid', 'timeGrid'],
+            defaultView: 'basicWeek',
+            aspectRatio: 1.5,
+            editable:false,
+            header:{
+            left:'',
+            center:'title',
+            right:'prev,next today',
 
     },
-    events: events,
-    eventRender: function(event, element) {
-      var startTime = moment(event.start).format('LT'); // Format start time
-      var endTime = moment(event.end).format('LT'); // Format end time
-      var eventInfo = '<div class="fc-title">' + event.title + '</div>'; // Title
-      eventInfo += '<div class="fc-time">' + startTime + ' - ' + endTime + '</div>'; // Start and end time
-      element.find('.fc-content').html(eventInfo); // Replace content with title and times
-    }
+        events: events,
+            eventRender: function(event, element) {
+            var startTime = moment(event.start).format('LT'); // Format start time
+            var endTime = moment(event.end).format('LT'); // Format end time
+            var eventInfo = '<div class="fc-title">' + event.title + '</div>'; // Title
+            eventInfo += '<div class="fc-time">' + startTime + ' - ' + endTime + '</div>'; // Start and end time
+            element.find('.fc-content').html(eventInfo); // Replace content with title and times
+            }
+        });
     });
-});
 </script>
  </head>
  <body>

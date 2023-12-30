@@ -28,23 +28,53 @@ class HomeController extends Controller
     {
 
         set_page_meta('Dashboard');
-        if(Auth::user()->user_type == User::USER_TYPE_ADMIN){
-            $events = Array();
-        $schedules = Schedule::all();
-        foreach($schedules as $schedule){
-            $events[]=[
-                      'title' => $schedule->user->first_name.' '.$schedule->user->last_name,
-                      'start' => $schedule->start,
-                      'end' => $schedule->end
-                    ];
-        }
-            return view('admin.dashboard.admin.index',compact('events'));
-        }elseif (Auth::user()->user_type == User::USER_TYPE_ANESTHEIOLOGISTS){
-            // return view('admin.dashboard.admin.index');
-        }else{
-            // return view('admin.dashboard.medical.index');
-        }
+        if (Auth::user()->user_type == User::USER_TYPE_ADMIN) {
+            $events = array();
+            $schedules = Schedule::all();
+            $totalSchedule = Schedule::count();
+            $anesthesiologists = User::where('user_type',User::USER_TYPE_ANESTHEIOLOGISTS)->count();
+            $medical_practitioners = User::where('user_type',User::USER_TYPE_MEDICAL_PRACTICES)->count();
+            $notAssignedSchedule = Schedule::where('status',Schedule::NOT_ASSIGNED_SCHEDULE)->count();
+            $assignedSchedule = Schedule::where('status',Schedule::ASSIGNED_SCHEDULE)->count();
+            $totalUser = $anesthesiologists +  $medical_practitioners;
+            foreach ($schedules as $schedule) {
+                $events[] = [
+                    'title' => $schedule->user->first_name . ' ' . $schedule->user->last_name,
+                    'start' => $schedule->start,
+                    'end' => $schedule->end
+                ];
+            }
+            return view('admin.dashboard.admin.index', compact('events','totalUser','totalSchedule', 'notAssignedSchedule','assignedSchedule'));
+        } elseif (Auth::user()->user_type == User::USER_TYPE_ANESTHEIOLOGISTS) {
+            $events = array();
+            $schedules = Schedule::where('user_id','=', Auth::user()->id)->get();
+            $user_schedules = Schedule::where('user_id','=', Auth::user()->id)->count();
 
+            $notAssignedSchedule = Schedule::where('user_id','=', Auth::user()->id)->where('status',Schedule::NOT_ASSIGNED_SCHEDULE)->count();
+            $assignedSchedule = Schedule::where('user_id','=', Auth::user()->id)->where('status',Schedule::ASSIGNED_SCHEDULE)->count();
+            foreach ($schedules as $schedule) {
+                $events[] = [
+                    'title' => $schedule->user->first_name . ' ' . $schedule->user->last_name,
+                    'start' => $schedule->start,
+                    'end' => $schedule->end
+                ];
+            }
+            return view('admin.dashboard.anasthesiologist.index', compact('events','schedules','user_schedules','notAssignedSchedule','assignedSchedule'));
+        } else {
+            $events = array();
+            $schedules = Schedule::where('user_id','=', Auth::user()->id)->get();
+            $user_schedules = Schedule::where('user_id','=', Auth::user()->id)->count();
+
+            $notAssignedSchedule = Schedule::where('user_id','=', Auth::user()->id)->where('status',Schedule::NOT_ASSIGNED_SCHEDULE)->count();
+            $assignedSchedule = Schedule::where('user_id','=', Auth::user()->id)->where('status',Schedule::ASSIGNED_SCHEDULE)->count();
+            foreach ($schedules as $schedule) {
+                $events[] = [
+                    'title' => $schedule->user->first_name . ' ' . $schedule->user->last_name,
+                    'start' => $schedule->start,
+                    'end' => $schedule->end
+                ];
+            }
+            return view('admin.dashboard.medical.index', compact('events','schedules','user_schedules','notAssignedSchedule','assignedSchedule'));
+        }
     }
-
 }
