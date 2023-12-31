@@ -1,5 +1,4 @@
 @extends('layouts.master')
-
 @section('content')
     <div class="row">
         <div class="col-md-9">
@@ -9,7 +8,6 @@
 
                     <form action="{{ route('admin.schedules.store') }}" method="post">
                         @csrf
-
                         <div class="row">
                             <div class="mb-3 col-md-4">
                                 <label class="form-label"> Start Time <span class="error">*</span></label>

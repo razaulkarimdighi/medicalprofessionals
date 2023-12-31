@@ -25,7 +25,7 @@ class AnesthesiologistController extends Controller
      */
     public function index(AnesthesiologistDataTable $dataTable)
     {
-        set_page_meta('Anesthesiologis');
+        set_page_meta('Anesthesiologist');
         return $dataTable->render('admin.anesthesiologists.index');
     }
 
@@ -59,7 +59,9 @@ class AnesthesiologistController extends Controller
      */
     public function show(string $id)
     {
-        //
+        //Show Honorary Note
+        $data = User::where('id', $id)->first();
+        return view('honorary-note', compact('data'));
     }
 
     /**
@@ -106,4 +108,7 @@ class AnesthesiologistController extends Controller
             return back();
         }
     }
+
+    //Show honorary note to admin
+
 }

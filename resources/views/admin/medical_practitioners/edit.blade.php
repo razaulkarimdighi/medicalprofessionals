@@ -67,7 +67,7 @@
                                         <i class="fa fa-save"></i> Save
                                     </button>
 
-                                    <a class="btn btn-secondary waves-effect" href="{{ route('admin.users.index') }}">
+                                    <a class="btn btn-secondary waves-effect" href="{{ route('admin.medical_practitioners.index') }}">
                                         <i class="fa fa-times"></i> Cancel
                                     </a>
                                 </div>

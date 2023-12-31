@@ -104,7 +104,7 @@ class RegisterController extends Controller
 
 
         }else{
-            return User::create([
+            $user = User::create([
                 'first_name' => $data['first_name'],
                 'last_name' => $data['last_name'],
                 'location' => $data['location'],
@@ -115,6 +115,14 @@ class RegisterController extends Controller
                 'anesthesiologist_type' =>   $data['anesthesiologist_type'],
                 'password' => Hash::make($data['password']),
             ]);
+
+            if ($user) {
+                $image = $this->fileUploadService->upload($data['honorary_note'], User::FILE_STORE_HONORARY_PATH, false, true);
+                $user->honorary_note = $image;
+                $user->save();
+            }
+
+             return $user;
         }
 
 

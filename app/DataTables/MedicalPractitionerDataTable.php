@@ -27,8 +27,8 @@ class MedicalPractitionerDataTable extends DataTable
             ->addColumn('action', function ($item) {
                 $buttons = '';
                     $buttons .= '<a class="dropdown-item" href="' . route('admin.medical_practitioners.edit', $item->id) . '" title="Edit"><i class="mdi mdi-square-edit-outline"></i> Edit </a>';
-
-                    $buttons .= '<a class="dropdown-item" href="' . route('admin.assign.anesthesiologist', $item->id) . '" title="Assign Anesthesiologist"><i class="mdi mdi-square-edit-outline"></i> Assign Anesthesiologist </a>';
+                    $buttons .= '<a class="dropdown-item" href="' . route('admin.medical_practitioners.show', $item->id) . '" title="Edit"><i class="fa fa-eye" aria-hidden="true"></i> Show </a>';
+                    $buttons .= '<a class="dropdown-item" href="' . route('admin.assign.anesthesiologist', $item->id) . '" title="Assign Anesthesiologist"><i class="fa fa-address-book" aria-hidden="true"></i> Assign Anesthesiologist </a>';
 
                 // TO-DO: need to chnage the super admin ID to 1, while Super admin ID will 1
                         $buttons .= '<form action="' . route('admin.medical_practitioners.destroy', $item->id) . '"  id="delete-form-' . $item->id . '" method="post" style="">

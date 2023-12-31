@@ -58,7 +58,8 @@ class MedicalPractitionerController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $data = User::where('id', $id)->first();
+        return view('honorary-note', compact('data'));
     }
 
     /**

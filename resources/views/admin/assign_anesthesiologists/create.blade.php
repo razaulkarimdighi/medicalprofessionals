@@ -5,64 +5,42 @@
         <div class="col-md-9">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title mb-3">{{get_page_meta('title', true)}}</h4>
+                    <h4 class="card-title mb-3">{{ get_page_meta('title', true) }}</h4>
 
                     <form action="{{ route('admin.assign_anesthesiologists.store') }}" method="post">
                         @csrf
-                            <div class="row mb-2">
-                                <div class="col-md-4">
-                                    <label class="form-label">Select Anesthesiologist <span class="error">*</span></label>
+                        <div class="row mb-2">
+                            <div class="col-md-4">
+                                <label class="form-label">Select Anesthesiologist <span class="error">*</span></label>
 
-                                    <input type="hidden" name="practicioner_id" value="{{ $practicioner_id }}">
-                                    <select class="form-control"
-                                            data-placeholder="Choose ..." id="anesthesiologist_id" name="anesthesiologist_id">
-                                        @foreach($anesthesiologists as $anesthesiologist)
-                                            <option value="{{$anesthesiologist->id}}" class="text-capitalize">{{$anesthesiologist->first_name}} {{ $anesthesiologist->last_name}}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('anesthesiologist_id')
+                                <input type="hidden" name="practicioner_id" value="{{ $practicioner_id }}">
+                                <select class="form-control" data-placeholder="Choose ..." id="anesthesiologist_id"
+                                    name="anesthesiologist_id">
+                                    @foreach ($anesthesiologists as $anesthesiologist)
+                                        <option value="{{ $anesthesiologist->id }}" class="text-capitalize">
+                                            {{ $anesthesiologist->first_name }} {{ $anesthesiologist->last_name }}</option>
+                                    @endforeach
+                                </select>
+                                @error('anesthesiologist_id')
                                     <p class="error">{{ $message }}</p>
-                                    @enderror
-                                </div>
-
-                                <div class="col-md-4">
-                                    <label class="form-label">Start<span class="error">*</span></label>
-
-
-                                    <select id="schedule" class="form-control Programme" name="start">
-                                        <option value="0" disabled>Select Schedule</option>
-                                        @foreach ($schedules as $schedule)
-                                        <option value="{{ $schedule->start }}">{{ $schedule->start }}</option>
-                                        @endforeach
-                                    </select>
-
-                                    @error('start')
-                                    <p class="error">{{ $message }}</p>
-                                    @enderror
-                                </div>
-
-                                <div class="col-md-4">
-                                    <label class="form-label">End Time<span class="error">*</span></label>
-
-
-                                    <select id="schedule" class="form-control Programme" name="end">
-                                        <option value="0" disabled>End Time</option>
-                                        @foreach ($schedules as $schedule)
-                                        <option value="{{ $schedule->end }}">{{ $schedule->end }}</option>
-                                        @endforeach
-                                    </select>
-
-                                    @error('end')
-                                    <p class="error">{{ $message }}</p>
-                                    @enderror
-                                </div>
-
-
-
-
-
-
+                                @enderror
                             </div>
+
+
+
+                            <div class="col-md-4">
+                                <label class="form-label">Schedule<span class="error">*</span></label>
+                                <select class="custom-select form-control mr-sm-2 @error('schedule') is-invalid @enderror"
+                                    id="schedule" name="schedule">
+                                </select>
+
+                                @error('schedule')
+                                    <p class="error">{{ $message }}</p>
+                                @enderror
+                            </div>
+
+
+                        </div>
                         <div class="row">
                             <div class="mb-3 offset-md-6 col-md-6">
                                 <div class="text-end">
@@ -70,7 +48,8 @@
                                         <i class="fa fa-save"></i> Save
                                     </button>
 
-                                    <a class="btn btn-secondary waves-effect" href="{{ route('admin.users.index') }}">
+                                    <a class="btn btn-secondary waves-effect"
+                                        href="{{ route('admin.medical_practitioners.index') }}">
                                         <i class="fa fa-times"></i> Cancel
                                     </a>
                                 </div>
@@ -88,70 +67,43 @@
 @push('script')
     <script src="{{ asset('/admin/js/passwordCheck.js') }}"></script>
 
-    <script type="text/javascript">
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            var schedule = $('#schedule');
+            $(document).on('change', '#anesthesiologist_id', function() {
+                let anesthesiologist = $(this).val();
+                $.ajax({
+                    method: 'get',
+                    url: "{{ route('admin.get.all.schedule.by.user.type') }}",
+                    data: {
+                        anesthesiologist: anesthesiologist
+                    },
+                    success: function(response) {
+                        console.log(response)
 
+                        var select =
+                            '<option selected disabled>--Select Sub-Category--</option>';
 
+                            response.schedules.forEach(function(row) {
+                            select += '<option value="' + row.id + '">' + row.start + ' to ' + row.end + ']</option>';
+                        });
+                        schedule.html(select);
 
-        // $("#anesthesiologist_id").change(function(){
-        //     alert("The text has been changed.");
-        // });
-        // $(document).ready(function(){
+                    }
 
-        //     $('#clicked').click(function (e) {
-        //         e.preventDefault();
-        //         console.log('clicked')
-        //     })
+                })
 
-        //     $("#anesthesiologist_id").change(function(){
-        //         alert("The text has been changed.");
-        //     });
+            });
 
-        //     $(document).on('change', '#anesthesiologist_id', function () {
-        //         console.log('clicked')
-        //         var vendor_type = $(this).val();
-        //         console.log('Vendor Type - ' + vendor_type);
-        //         if (vendor_type){
-        //             loader.show();
-        //             vendorId.attr('disabled','disabled');
-        //             $.ajax({
-        //                 type: 'get',
-        //                 url: '/admin/payments/get/vendor',
-        //                 data: {'vendor_type': vendor_type},
-        //                 dataType: 'json',//return data will be json
-        //                 success: function (data) {
-        //                     console.log(data)
-        //                     var select = '<option selected disabled>--Select Builder/Subcontractor--</option>';
-        //                     console.log(data.length)
-        //                     if (data.length > 0){
-        //                         data.forEach(function (row){
-        //                             select += '<option value="'+row.id+'">'+row.name+'</option>';
-        //                         });
-        //                     }else {
-        //                         let oldText = $(".select2-selection__placeholder").text();
-        //                         let newText = "No "+vendor_type+ " found";
-        //                         console.log(newText)
-        //                         $(".select2-selection__placeholder").text($(".select2-selection__placeholder").text().replace(oldText, newText));
-        //                         // var text = $(".select2-selection__placeholder").text();
-        //                         // text.replace('Please select','No builder found');
-        //                         // console.log(text)
-        //                     }
-        //                     if (!$.trim(data)){
-        //                         vendorId.attr('disabled','disabled');
-        //                         loader.hide();
-        //                     }
-        //                     else{
-        //                         vendorId.removeAttr('disabled');
-        //                         vendorId.html(select);
-        //                         loader.hide();
-        //                     }
-        //                 },
-        //                 error: function () {
-        //                 }
-        //             });
-        //         }
-        //     });
+        });
+    </script>
 
-        // });
-        </script>
+    <script type="text/javascript"></script>
 @endpush
-

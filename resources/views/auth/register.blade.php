@@ -124,11 +124,11 @@
                                         <option selected disabled>Select One</option>
                                         <option class="text-capitalize"
                                             value="{{ App\Models\User::USER_TYPE_MEDICAL_PRACTICES }}">
-                                            {{ App\Models\User::USER_TYPE_MEDICAL_PRACTICES }}</option>
+                                            Medical Practitioner</option>
 
                                         <option class="text-capitalize"
                                             value="{{ App\Models\User::USER_TYPE_ANESTHEIOLOGISTS }}">
-                                            {{ App\Models\User::USER_TYPE_ANESTHEIOLOGISTS }}</option>
+                                           Anesthesiologist</option>
 
                                     </select>
                                     @error('user_type')
@@ -144,24 +144,18 @@
                                 <label for="anesthesiologist_type"
                                     class="col-md-4 col-form-label text-md-end">{{ __('Anesthesiologist Type') }}</label>
 
-                                <div class="col-md-6">
-                                    <select class="form-select" name="anesthesiologist_type"
-                                        aria-label="Default select example">
-                                        <option selected disabled>Select One</option>
-                                        <option class="text-capitalize" value="Anesthesiologist Type One"> Anesthesiologist
-                                            Type One </option>
-                                        <option class="text-capitalize" value="Anesthesiologist Type Two"> Anesthesiologist
-                                            Type Two </option>
-                                        <option class="text-capitalize" value="Anesthesiologist Type Three">
-                                            Anesthesiologist Type Three
-                                        </option>
-                                    </select>
-                                    @error('user_type')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
+                                    <div class="col-md-6">
+                                        <input id="anesthesiologist_type" type="text"
+                                            class="form-control @error('anesthesiologist_type') is-invalid @enderror" name="anesthesiologist_type"
+                                            value="{{ old('anesthesiologist_type') }}" autocomplete="anesthesiologist_type">
+
+                                        @error('anesthesiologist_type')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+
                             </div>
 
                             <div class="row mb-2">
@@ -237,6 +231,9 @@
 
         .hero_image .btn {
             background: #0463FA;
+        }
+        input#honorary_note.form-control{
+            background: none;
         }
     </style>
 @endpush

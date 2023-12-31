@@ -45,13 +45,17 @@ class AssignAnesthesiologistController extends Controller
      */
     public function store(Request $request)
     {
+       return $data = $request->all();
+        $schedule = Schedule::where('user_id','=',$assignment->anesthesiologist_id)->where('schedule_id','=',$data['schedule'])->first();
+        $ass = [
+            ''
+        ];
 
         try {
 
-            $data = $request->all();
-            $assignment = $this->assignAnesthesiologistService->storeOrUpdate($data, null);
+            $assignment = $this->assignAnesthesiologistService->storeOrUpdate($ass, null);
             if($assignment){
-                $schedule = Schedule::where('user_id','=',$assignment->anesthesiologist_id)->first();
+                $schedule = Schedule::where('user_id','=',$assignment->anesthesiologist_id)->where('schedule_id','=',$data['schedule'])->first();
                 $schedule->status = "assigned";
                 $schedule->save();
                 record_created_flash();
@@ -122,6 +126,19 @@ class AssignAnesthesiologistController extends Controller
         set_page_meta('Assignments');
         return $dataTable->render('anesthesiologist.assignment');
 
+    }
+
+    //Anesthesiologist Dependent Dropdown Menu
+
+    public function fetchSchedules(Request $request){
+
+
+        $schedules = Schedule::where('user_id', $request->anesthesiologist)->get();
+
+        return response()->json([
+            'status' => 'success',
+            'schedules' => $schedules,
+        ]);
     }
 
 

@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Auth;
 
 class AnesthesiologistDataTable extends DataTable
 {
-   /**
+    /**
      * Build the DataTable class.
      *
      * @param QueryBuilder $query Results from query() method.
@@ -26,10 +26,12 @@ class AnesthesiologistDataTable extends DataTable
         return (new EloquentDataTable($query))
             ->addColumn('action', function ($item) {
                 $buttons = '';
-                    $buttons .= '<a class="dropdown-item" href="' . route('admin.anesthesiologists.edit', $item->id) . '" title="Edit"><i class="mdi mdi-square-edit-outline"></i> Edit </a>';
+                $buttons .= '<a class="dropdown-item" href="' . route('admin.anesthesiologists.edit', $item->id) . '" title="Edit"><i class="mdi mdi-square-edit-outline"></i> Edit </a>';
+
+                $buttons .= '<a class="dropdown-item" href="' . route('admin.anesthesiologists.show', $item->id) . '" title="Edit"><i class="fa fa-eye" aria-hidden="true"></i> Show </a>';
 
                 // TO-DO: need to chnage the super admin ID to 1, while Super admin ID will 1
-                        $buttons .= '<form action="' . route('admin.anesthesiologists.destroy', $item->id) . '"  id="delete-form-' . $item->id . '" method="post" style="">
+                $buttons .= '<form action="' . route('admin.anesthesiologists.destroy', $item->id) . '"  id="delete-form-' . $item->id . '" method="post" style="">
                         <input type="hidden" name="_token" value="' . csrf_token() . '">
                         <input type="hidden" name="_method" value="DELETE">
                         <button class="dropdown-item text-danger" onclick="return makeDeleteRequest(event, ' . $item->id . ')"  type="submit" title="Delete"><i class="mdi mdi-trash-can-outline"></i> Delete</button></form>
@@ -45,21 +47,22 @@ class AnesthesiologistDataTable extends DataTable
             ->editColumn('first_name', function ($item) {
                 return $item->full_name;
             })
-            ->editColumn('permission',function ($item){
+            ->editColumn('permission', function ($item) {
                 //  $badge = $item->permission == 'accepted' ? "bg-success" : "bg-danger";
                 //  return '<span class="badge ' . $badge . '">' . Str::upper($item->permission) . '</span>';
 
-                 $badge = $item->permission == 'accepted' ? "bg-success" :  $badge = $item->permission == 'rejected'? "bg-danger" : "bg-primary";
-                 return '<span class="badge ' . $badge . '">' . Str::upper($item->permission) . '</span>';
-             })
-            //->editColumn('user_type',function ($item){
-            //     return '<span class="text-capitalize">' . $item->user_type. '</span>';
-            // })->filterColumn('first_name', function ($query, $keyword) {
+                $badge = $item->permission == 'accepted' ? "bg-success" :  $badge = $item->permission == 'rejected' ? "bg-danger" : "bg-primary";
+                return '<span class="badge ' . $badge . '">' . Str::upper($item->permission) . '</span>';
+            })
+            // ->editColumn('honorary_note',function ($item){
+            //     return '<a class="text-capitalize" target="" href="' . route('admin.anesthesiologists.show', $item->id) . '">' . $item->honorary_note. '</a>';
+            // })
+            //->filterColumn('first_name', function ($query, $keyword) {
             //     $sql = "CONCAT(users.first_name,'-',users.last_name)  like ?";
             //     $query->whereRaw($sql, ["%{$keyword}%"]);
             // })
-            ->rawColumns(['action', 'first_name', 'permission']);
-            // ->setRowId('id');
+            ->rawColumns(['action', 'first_name', 'permission', 'honorary_note']);
+        // ->setRowId('id');
 
     }
 
@@ -68,7 +71,7 @@ class AnesthesiologistDataTable extends DataTable
      */
     public function query(User $model): QueryBuilder
     {
-        return $model->newQuery()->where('user_type', '=',User::USER_TYPE_ANESTHEIOLOGISTS)->orderBy('id', 'DESC')->select('users.*');
+        return $model->newQuery()->where('user_type', '=', User::USER_TYPE_ANESTHEIOLOGISTS)->orderBy('id', 'DESC')->select('users.*');
     }
 
     /**
@@ -77,14 +80,13 @@ class AnesthesiologistDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('user-table')
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
-                    //->dom('Bfrtip')
-                    ->orderBy(1)
-                    ->selectStyleSingle()
-                    ->addAction(['width' => '55px', 'class' => 'text-center', 'printable' => false, 'exportable' => false, 'title' => 'Action']);
-
+            ->setTableId('user-table')
+            ->columns($this->getColumns())
+            ->minifiedAjax()
+            //->dom('Bfrtip')
+            ->orderBy(1)
+            ->selectStyleSingle()
+            ->addAction(['width' => '55px', 'class' => 'text-center', 'printable' => false, 'exportable' => false, 'title' => 'Action']);
     }
 
     /**
@@ -94,11 +96,12 @@ class AnesthesiologistDataTable extends DataTable
     {
 
         return [
-//            Column::computed('DT_RowIndex', 'SL#'),
-Column::make('first_name', 'first_name')->title('Name'),
-Column::make('permission', 'permission')->title('Permission'),
-Column::make('phone', 'phone')->title('Phone'),
-Column::make('email', 'email')->title('Email'),
+            //            Column::computed('DT_RowIndex', 'SL#'),
+            Column::make('first_name', 'first_name')->title('Name'),
+           // Column::make('honorary_note', 'honorary_note')->title('Honorary Note'),
+            Column::make('permission', 'permission')->title('Permission'),
+            Column::make('phone', 'phone')->title('Phone'),
+            Column::make('email', 'email')->title('Email'),
         ];
     }
 
@@ -109,5 +112,4 @@ Column::make('email', 'email')->title('Email'),
     {
         return 'User_' . date('YmdHis');
     }
-
 }
