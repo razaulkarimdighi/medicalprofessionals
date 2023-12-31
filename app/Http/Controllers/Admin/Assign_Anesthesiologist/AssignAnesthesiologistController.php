@@ -45,14 +45,13 @@ class AssignAnesthesiologistController extends Controller
      */
     public function store(Request $request)
     {
-       return $data = $request->all();
-        $schedule = Schedule::where('user_id','=',$assignment->anesthesiologist_id)->where('schedule_id','=',$data['schedule'])->first();
-        $ass = [
-            ''
-        ];
 
         try {
-
+            $data = $request->all();
+            $schedule = Schedule::where('user_id','=',$assignment->anesthesiologist_id)->where('schedule_id','=',$data['schedule'])->first();
+            $ass = [
+                ''
+            ];
             $assignment = $this->assignAnesthesiologistService->storeOrUpdate($ass, null);
             if($assignment){
                 $schedule = Schedule::where('user_id','=',$assignment->anesthesiologist_id)->where('schedule_id','=',$data['schedule'])->first();
