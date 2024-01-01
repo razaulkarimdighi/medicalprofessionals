@@ -241,10 +241,7 @@
 @push('script')
     <script>
         $(document).ready(function() {
-
             $("#anesthesiologist_type").hide();
-
-
             $("#user_type").on("change", function() {
                 var user_type = $(this).val();
 

@@ -16,7 +16,7 @@
                                 <input type="hidden" name="practicioner_id" value="{{ $practicioner_id }}">
                                 <select class="form-control" data-placeholder="Choose ..." id="anesthesiologist_id"
                                     name="anesthesiologist_id">
-                                    <option value="" disabled selected  class="text-capitalize">
+                                    <option value="" disabled selected class="text-capitalize">
                                         Select Anesthesiologist
                                     </option>
                                     @foreach ($anesthesiologists as $anesthesiologist)
@@ -91,11 +91,18 @@
                     success: function(response) {
                         console.log(response)
 
+                        var options = {
+                            hour: 'numeric',
+                            minute: 'numeric',
+                            hour12: true
+                        };
+
                         var select =
                             '<option selected disabled>Select Schedule</option>';
 
-                            response.schedules.forEach(function(row) {
-                            select += '<option value="' + row.id + '">' + row.start + ' to ' + row.end + '</option>';
+                        response.schedules.forEach(function(row) {
+                            select += '<option value="' + row.id + '">' +new Date(row.start).toLocaleString('en-US', options) +
+                                ' to ' + row.end + '</option>';
                         });
                         schedule.html(select);
 
