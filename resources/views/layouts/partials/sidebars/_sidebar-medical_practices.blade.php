@@ -14,7 +14,7 @@
                 </li>
                 <li>
                     <a href="{{ route('admin.schedules.create') }}" class="waves-effect">
-                        <i class="fa fa-calendar-plus-o" aria-hidden="true"></i><span> Create Schedule </span>
+                        <i class="fa fa-plus" aria-hidden="true"></i><span> Create Schedule </span>
                     </a>
                 </li>
                 <li>

@@ -46,24 +46,29 @@ class AssignAnesthesiologistController extends Controller
     public function store(Request $request)
     {
 
+
         try {
+
             $data = $request->all();
-            $schedule = Schedule::where('user_id','=',$assignment->anesthesiologist_id)->where('schedule_id','=',$data['schedule'])->first();
+            $schedule = Schedule::where('user_id','=', $data['anesthesiologist_id'])->where('id','=',$data['schedule'])->first();
             $ass = [
-                ''
+                'anesthesiologist_id' => $data['anesthesiologist_id'],
+                'practicioner_id' => $data['practicioner_id'],
+                'start' => $schedule->start,
+                'end' => $schedule->end,
             ];
             $assignment = $this->assignAnesthesiologistService->storeOrUpdate($ass, null);
+
             if($assignment){
-                $schedule = Schedule::where('user_id','=',$assignment->anesthesiologist_id)->where('schedule_id','=',$data['schedule'])->first();
+                $schedule = Schedule::where('user_id','=', $data['anesthesiologist_id'])->where('id','=',$data['schedule'])->first();
                 $schedule->status = "assigned";
                 $schedule->save();
                 record_created_flash();
                }
 
-
         } catch (\Exception $e) {
         }
-        return redirect()->route('admin.anesthesiologists.index');
+        return redirect()->route('admin.assign_anesthesiologists.index');
 
 
     }
@@ -132,7 +137,7 @@ class AssignAnesthesiologistController extends Controller
     public function fetchSchedules(Request $request){
 
 
-        $schedules = Schedule::where('user_id', $request->anesthesiologist)->get();
+        $schedules = Schedule::where('user_id', $request->anesthesiologist)->where('status','=','not_assigned')->get();
 
         return response()->json([
             'status' => 'success',
