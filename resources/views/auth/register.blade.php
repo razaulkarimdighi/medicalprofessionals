@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container-fluid p-0 m-0">
-        <div class="hero_image" style="background-image: url({{ asset('frontend/img/doctor.jpg') }})">
+        <div class="hero_image img-fluid" style="background-image: url({{ asset('frontend/img/doctor.jpg') }})">
             <div class="color_overlay d-flex justify-content-center align-items-center flex-column">
                 <div class="card w-50">
                     <div class="p-3">{{ __('Register') }}</div>
@@ -102,8 +102,9 @@
 
                                 <div class="col-md-6">
                                     <input id="honorary_note" type="file"
-                                        class="form-control @error('honorary_note') is-invalid @enderror" name="honorary_note"
-                                        value="{{ old('honorary_note') }}" autocomplete="honorary_note">
+                                        class="form-control @error('honorary_note') is-invalid @enderror"
+                                        name="honorary_note" value="{{ old('honorary_note') }}"
+                                        autocomplete="honorary_note">
 
                                     @error('honorary_note')
                                         <span class="invalid-feedback" role="alert">
@@ -128,7 +129,7 @@
 
                                         <option class="text-capitalize"
                                             value="{{ App\Models\User::USER_TYPE_ANESTHEIOLOGISTS }}">
-                                           Anesthesiologist</option>
+                                            Anesthesiologist</option>
 
                                     </select>
                                     @error('user_type')
@@ -144,17 +145,18 @@
                                 <label for="anesthesiologist_type"
                                     class="col-md-4 col-form-label text-md-end">{{ __('Anesthesiologist Type') }}</label>
 
-                                    <div class="col-md-6">
-                                        <input id="anesthesiologist_type" type="text"
-                                            class="form-control @error('anesthesiologist_type') is-invalid @enderror" name="anesthesiologist_type"
-                                            value="{{ old('anesthesiologist_type') }}" autocomplete="anesthesiologist_type">
+                                <div class="col-md-6">
+                                    <input id="anesthesiologist_type" type="text"
+                                        class="form-control @error('anesthesiologist_type') is-invalid @enderror"
+                                        name="anesthesiologist_type" value="{{ old('anesthesiologist_type') }}"
+                                        autocomplete="anesthesiologist_type">
 
-                                        @error('anesthesiologist_type')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
+                                    @error('anesthesiologist_type')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
 
                             </div>
 
@@ -214,14 +216,12 @@
             height: 100vh;
 
         }
-
         .hero_image h1 {
             color: white;
             text-shadow: 2px 2px 2px rgba(0, 0, 0, .2);
             font-size: 50px;
 
         }
-
         .hero_image .color_overlay {
             position: absolute;
             width: 100%;
@@ -232,7 +232,8 @@
         .hero_image .btn {
             background: #0463FA;
         }
-        input#honorary_note.form-control{
+
+        input#honorary_note.form-control {
             background: none;
         }
     </style>
@@ -257,4 +258,4 @@
 
         });
     </script>
-    @endpush
+@endpush
