@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\Anesthesiologist\AnesthesiologistController;
 use App\Http\Controllers\Admin\Assign_Anesthesiologist\AssignAnesthesiologistController;
 use App\Http\Controllers\Admin\Medical_Practitioner\MedicalPractitionerController;
 use App\Models\Schedule;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,9 +28,12 @@ Route::get('/', function () {
     // return redirect()->route('login');
     return view('frontend.index');
 });
-Auth::routes();
 
+
+Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+
 
 
 //all routes for admin

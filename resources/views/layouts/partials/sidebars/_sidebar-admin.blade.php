@@ -25,7 +25,7 @@
                         <li class="{{ request()->is('admin/users*') ? 'mm-active' : '' }}">
                             <a href="{{ route('admin.users.index') }}"
                                class="{{ request()->routeIs('admin.users.index') ? 'active' : '' }}">
-                                Users
+                               <i class="fa fa-user" aria-hidden="true"></i><span>Users</span>
                             </a>
                         </li>
                     </ul>

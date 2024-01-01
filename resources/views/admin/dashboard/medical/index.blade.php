@@ -5,7 +5,7 @@
     <div class="mb-5">
         <div class="row">
             <div class="col-xl-4 col-md-6">
-                <div class="card mini-stat bg-light text-dark">
+                <div class="card mini-stat bg-white text-dark">
                     <div class="card-body">
                         <div class="mb-4">
                             <h5 class="font-size-16 text-uppercase ">
@@ -18,7 +18,7 @@
                 </div>
             </div>
             <div class="col-xl-4 col-md-6">
-                <div class="card mini-stat bg-light text-dark">
+                <div class="card mini-stat bg-white text-dark">
                     <div class="card-body">
                         <div class="mb-4">
                             <h5 class="font-size-16 text-uppercase ">
@@ -31,7 +31,7 @@
                 </div>
             </div>
             <div class="col-xl-4 col-md-6">
-                <div class="card mini-stat bg-light text-dark">
+                <div class="card mini-stat bg-white text-dark">
                     <div class="card-body">
                         <div class="mb-4">
                             <h5 class="font-size-16 text-uppercase ">
@@ -43,11 +43,7 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
-
-
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -72,24 +68,37 @@
         div.fc-title {
             color: #ffffff;
             font-size: 14px;
-            font-weight: bold;
         }
 
         div.fc-time {
             color: #ffffff;
-            font-size: 12px;
-            font-weight: bold;
+            font-size: 14px;
         }
 
         .fc-event,
         .fc-event-dot {
             background-color: #0463FA;
             padding: 2px;
-            font-size: 12px;
+            font-size: 14px;
             color: #ffffff;
         }
         .fc-unthemed td.fc-today {
             background: #f8f8f8;
+        }
+        .fc-time-grid-event {
+            width: 150px;
+            text-align: center;
+        }
+
+        .fc-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        body {
+            background-color: #f8f8fa;
         }
     </style>
 @endpush
@@ -109,11 +118,13 @@
             $('#calendar').fullCalendar({
                 plugins: ['interaction', 'dayGrid', 'timeGrid'],
                 defaultView: 'agendaDay',
+                slotDuration: '00:15:00', // Each slot represents 15 minutes
+                slotLabelInterval: '01:00:00', // Show time labels every hour
                 aspectRatio: 1.5,
                 editable: false,
                 header: {
-                    left: 'month, basicWeek, agendaDay',
-                    center: 'title',
+                    left: 'title',
+                    center: '',
                     right: 'prev,next today',
 
                 },

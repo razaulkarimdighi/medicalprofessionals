@@ -1,7 +1,7 @@
 @extends('frontend.master')
 
-@section( 'banner')
-
+@section( 'content')
+@push('style')
 <style>
     .hero_image{
         background-size: cover;
@@ -30,6 +30,7 @@
         background: #0463FA;
     }
 </style>
+@endpush
 <div class="container-fluid p-0 m-0">
     <div class="hero_image" style="background-image: url({{ asset('frontend/img/doctor.jpg') }})" >
         <div class="color_overlay d-flex justify-content-center align-items-center">

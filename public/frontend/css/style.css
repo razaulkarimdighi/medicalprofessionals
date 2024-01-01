@@ -102,7 +102,6 @@
 .navbar .navbar-nav .nav-link.active {
     color: var(--primary);
 }
-
 @media (max-width: 991.98px) {
     .navbar .navbar-nav .nav-link  {
         margin-right: 0;
@@ -427,7 +426,7 @@
 
 .testimonial-carousel .owl-item.center .testimonial-item img {
     background: var(--primary) !important;
-} 
+}
 
 .testimonial-carousel .owl-nav {
     position: absolute;

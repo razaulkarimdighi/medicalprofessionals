@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-@include('frontend.partials._head')
-@stack('style')
+
+<head>
+    @include('frontend.partials._head')
+</head>
+
+
 <body>
 
 
@@ -14,7 +18,7 @@
     @include('frontend.partials._navbar')
 
 
-   @yield('banner')
+    @yield('content')
 
 
     @include('frontend.partials._footer')
@@ -23,7 +27,8 @@
     {{-- <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a> --}}
 
     <!-- JavaScript Libraries -->
- @include('frontend.partials._footer_script')
- @stack('script')
+    @include('frontend.partials._footer_script')
+    @stack('script')
 </body>
+
 </html>

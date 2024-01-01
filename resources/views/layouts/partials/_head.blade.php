@@ -7,11 +7,7 @@
 
 <!-- App favicon -->
 <!--Favicon-->
-<link rel="icon" href="{{ asset('/storage/settings/favicon.ico') }}" />
-<link rel="icon" href="{{ asset('/storage/logo-light.png') }}" type="image/svg+xml" />
-{{--
-<link rel="shortcut icon" href="{{ storagelink(config('settings.site_favicon')) }}">--}}
-
+<link rel="icon" type="image/png" sizes="16x16" href="{{ asset('storage/img/favicon-16x16.png') }}">
 <!-- Select2 CSS -->
 <link href="{{ asset('admin/libs/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css">
 
