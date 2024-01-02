@@ -29,7 +29,7 @@ class MedicalPractitionerEditRequest extends FormRequest
             'last_name'  => ['required'],
             'phone'      => ['required'],
             'permission'      => ['required'],
-            'address'      => ['required'],
+            'location'      => ['required'],
         ];
         return $rules;
     }

@@ -51,7 +51,7 @@
                             <div class="mb-3 col-md-6">
                                 <label class="form-label">Address </label>
                                 <input type="text" name="address" class="form-control" placeholder="Title"
-                                       value="{{ $user->address }}">
+                                       value="{{ $user->location }}">
                                 @error('address')
                                 <p class="error">{{ $message }}</p>
                                 @enderror

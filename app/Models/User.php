@@ -75,4 +75,8 @@ class User extends Authenticatable
     public function anesthesiologistAssignments(){
         return $this->hasMany(Assignment::class,'anesthesiologist_id');
     }
+
+    public function users(){
+        return $this->hasMany(Schedule::class,'user_id');
+    }
 }

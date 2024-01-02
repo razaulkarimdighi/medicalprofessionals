@@ -15,8 +15,8 @@
                 </li>
 
                 <li>
-                    <a href="{{ route('admin.schedules.create') }}" class="waves-effect">
-                        <i class="fa fa-plus"></i><span> Create Schedule </span>
+                    <a href="{{ route('admin.get.anesthesiologist.schedule') }}" class="waves-effect">
+                        <i class="fa fa-calendar" aria-hidden="true"></i><span> Schedules </span>
                     </a>
                 </li>
 

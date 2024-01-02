@@ -42,7 +42,7 @@ class HomeController extends Controller
             foreach ($assignedSchedules as $schedule) {
 
                 $events[] = [
-                    'title' => 'A:'.' '.$schedule->anesthesiologist->first_name . ' ' . $schedule->anesthesiologist->last_name .' '. 'M:'. ' ' . $schedule->practicioner->first_name . ' ' . $schedule->practicioner->last_name,
+                    'title' => $schedule->anesthesiologist->first_name . ' ' . $schedule->anesthesiologist->last_name . ' with ' . $schedule->practicioner->first_name . ' ' . $schedule->practicioner->last_name,
                     'start' => $schedule->start,
                     'end' => $schedule->end
                 ];
@@ -65,14 +65,14 @@ class HomeController extends Controller
             return view('admin.dashboard.anasthesiologist.index', compact('events','schedules','user_schedules','notAssignedSchedule','assignedSchedule'));
         } else {
             $events = array();
-            $schedules = Schedule::where('user_id','=', Auth::user()->id)->get();
+            $schedules = Assignment::where('practicioner_id','=', Auth::user()->id)->get();
             $user_schedules = Schedule::where('user_id','=', Auth::user()->id)->count();
 
             $notAssignedSchedule = Schedule::where('user_id','=', Auth::user()->id)->where('status',Schedule::NOT_ASSIGNED_SCHEDULE)->count();
             $assignedSchedule = Schedule::where('user_id','=', Auth::user()->id)->where('status',Schedule::ASSIGNED_SCHEDULE)->count();
             foreach ($schedules as $schedule) {
                 $events[] = [
-                    'title' => $schedule->user->first_name . ' ' . $schedule->user->last_name,
+                    'title' => $schedule->anesthesiologist->first_name . ' ' . $schedule->anesthesiologist->last_name,
                     'start' => $schedule->start,
                     'end' => $schedule->end
                 ];

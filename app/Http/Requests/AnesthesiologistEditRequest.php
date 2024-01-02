@@ -30,7 +30,7 @@ class AnesthesiologistEditRequest extends FormRequest
             'last_name'  => ['required'],
             'permission'  => ['required'],
             'phone'      => ['required'],
-            'address'      => ['required'],
+            'location'      => ['required'],
 
         ];
         return $rules;

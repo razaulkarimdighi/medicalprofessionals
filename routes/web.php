@@ -48,8 +48,11 @@ Route::prefix('admin')->as('admin.')->group(function () {
     //All Schedules to show admin
     Route::get('/get/all/schedule/to/show', [ScheduleController::class,'showAllSchedule'])->name('get.all.schedule');
 
-    //Anesthesiologit Schedule to show after login
-    Route::get('/get/anesthesiologist/schedule/to/show', [ScheduleController::class,'showAnesthesiologistSchedule'])->name('get.anesthesiologit.schedule');
+    //Schedule to show anesthesiologist
+    Route::get('/get/anesthesiologist/schedule/to/show', [ScheduleController::class,'showAnesthesiologitSchedule'])->name('get.anesthesiologist.schedule');
+
+     //Schedule to show medical practitioner
+     Route::get('/get/practitioner/schedule/to/show', [ScheduleController::class,'showMedicalPractitionerSchedule'])->name('get.prectitioner.schedule');
 
      //Schedules for dependent dropdown to assgin
      Route::get('/get/all/schedule/by/user-type', [AssignAnesthesiologistController::class,'fetchSchedules'])->name('get.all.schedule.by.user.type');

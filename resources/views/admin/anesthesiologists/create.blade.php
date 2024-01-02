@@ -48,10 +48,10 @@
                             </div>
 
                             <div class="mb-3 col-md-6">
-                                <label class="form-label">Address </label>
-                                <input type="text" name="address" class="form-control" placeholder="Title"
-                                       value="{{ old('address') }}">
-                                @error('address')
+                                <label class="form-label">Location </label>
+                                <input type="text" name="location" class="form-control" placeholder="Location"
+                                       value="{{ old('location') }}">
+                                @error('location')
                                 <p class="error">{{ $message }}</p>
                                 @enderror
                             </div>

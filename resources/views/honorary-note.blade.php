@@ -39,12 +39,13 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-body">
+                    <h4>Honorary Note</h4>
                         @if ($data->honorary_note)
                         <div class="">
                             <iframe  width="100%" height="400" src="{{ asset('storage/honorary/'.$data->honorary_note) }}">Honorary Note</iframe>
                         </div>
                     @else
-                        <h4 class="text-center">No Honorary Note available</h4>
+                        <h6 class="text-center">No Honorary Note available</h6>
                     @endif
                 </div>
             </div>

@@ -29,7 +29,7 @@ class MedicalPractitionerRequest extends FormRequest
             'last_name'  => ['required'],
             'email'      => ['required', 'string', Rule::unique('users')->ignore($this->user)],
             'phone'      => ['required'],
-            'address'      => ['required'],
+            'location'      => ['required'],
             'password'   => [
                 'required', 'string', 'confirmed', Password::min(8)
                     ->mixedCase()

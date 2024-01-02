@@ -13,8 +13,8 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('admin.schedules.create') }}" class="waves-effect">
-                        <i class="fa fa-plus" aria-hidden="true"></i><span> Create Schedule </span>
+                    <a href="{{ route('admin.get.prectitioner.schedule') }}" class="waves-effect">
+                        <i class="fa fa-calendar" aria-hidden="true"></i><span> Schedules </span>
                     </a>
                 </li>
                 <li>

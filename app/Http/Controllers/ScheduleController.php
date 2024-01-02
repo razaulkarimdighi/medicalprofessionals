@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\ScheduleDataTableForAdmin;
+use App\DataTables\ScheduleDataTableForAnesthesiologist;
+use App\DataTables\ScheduleDataTableForMedicalPractitioner;
 use Illuminate\Http\Request;
 use App\DataTables\ScheduleDataTable;
 use App\Http\Requests\ScheduleRequest;
@@ -47,10 +49,10 @@ class ScheduleController extends Controller
         try {
         $this->scheduleService->storeOrUpdate($data, null);
         record_created_flash();
-
+        return redirect()->route('admin.get.prectitioner.schedule');
         } catch (\Exception $e) {
         }
-        return redirect()->route('admin.schedules.index');
+
     }
 
     /**
@@ -112,8 +114,15 @@ class ScheduleController extends Controller
         return $dataTable->render('admin.schedule.index');
     }
 
-    public function showAnesthesiologistSchedule(ScheduleDataTableForAdmin $dataTable){
+    //Show schedules to anesthesiologist;
+    public function showAnesthesiologitSchedule(ScheduleDataTableForAnesthesiologist $dataTable){
         set_page_meta('Schedules');
-        return $dataTable->render('admin.schedule.index');
+        return $dataTable->render('anesthesiologist.showschedule');
+    }
+
+     //Show schedules to medical practitioner;
+     public function showMedicalPractitionerSchedule(ScheduleDataTableForMedicalPractitioner $dataTable){
+        set_page_meta('Schedules');
+        return $dataTable->render('medical_practitioners.showschedule');
     }
 }

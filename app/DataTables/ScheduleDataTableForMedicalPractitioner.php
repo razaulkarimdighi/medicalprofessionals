@@ -16,7 +16,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 
-class ScheduleDataTableForAdmin extends DataTable
+
+class ScheduleDataTableForMedicalPractitioner extends DataTable
 {
  /**
      * Build the DataTable class.
@@ -48,11 +49,7 @@ class ScheduleDataTableForAdmin extends DataTable
                  return '<span class="badge ' . $badge . '">' . Str::upper($item->status) . '</span>';
 
             })
-            ->editColumn('user_id', function ($item) {
-                return $item->user->first_name.' '.$item->user->last_name;
-
-          })
-            ->rawColumns(['status']);
+            ->rawColumns(['status','action']);
             // ->setRowId('id');
 
     }
@@ -62,7 +59,7 @@ class ScheduleDataTableForAdmin extends DataTable
      */
     public function query(Schedule $model): QueryBuilder
     {
-        return $model->newQuery()->orderBy('id', 'DESC')->select('schedules.*');
+        return $model->newQuery()->where('user_id','=', Auth::user()->id)->orderBy('id', 'DESC')->select('schedules.*');
     }
 
     /**
@@ -77,8 +74,8 @@ class ScheduleDataTableForAdmin extends DataTable
                     ->minifiedAjax()
                     //->dom('Bfrtip')
                     ->orderBy(1)
-                    ->selectStyleSingle();
-                    // ->addAction(['width' => '55px', 'class' => 'text-center', 'printable' => false, 'exportable' => false, 'title' => 'Action']);
+                    ->selectStyleSingle()
+                    ->addAction(['width' => '55px', 'class' => 'text-center', 'printable' => false, 'exportable' => false, 'title' => 'Action']);
 //             ->buttons([
 //                        Button::make('excel'),
 //                        Button::make('csv'),
@@ -98,7 +95,6 @@ class ScheduleDataTableForAdmin extends DataTable
 
         return [
 //            Column::computed('DT_RowIndex', 'SL#'),
-            Column::make('user_id', 'user_id')->title('User'),
             Column::make('start', 'start')->title('Start'),
             Column::make('end', 'end')->title('End'),
             Column::make('status', 'status')->title('Status'),

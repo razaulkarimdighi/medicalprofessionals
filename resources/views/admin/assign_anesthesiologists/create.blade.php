@@ -101,7 +101,7 @@
                             '<option selected disabled>Select Schedule</option>';
 
                         response.schedules.forEach(function(row) {
-                            select += '<option value="' + row.id + '">' + new Date(row.start).toLocaleString('en-US', options) +
+                            select += '<option value="' + row.id + '">' + new Date(row.start).toDateString('en-US')+ ', ' + new Date(row.start).toLocaleString('en-US', options) +
                                 ' to ' + new Date(row.end).toLocaleString('en-US', options) + '</option>';
                         });
                         schedule.html(select);
