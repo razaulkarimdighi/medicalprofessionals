@@ -1,6 +1,6 @@
 <!-- Navbar Start -->
 <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0 wow fadeIn" data-wow-delay="0.1s">
-    <a href="home" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+    <a href="{{route('index')}}" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
         <img src="{{ asset('frontend/img/LogoNarkoseWien.png') }}" class="img-fluid" width="75px">
         <h1 class="m-0 text-primary p-2">Narkose-Wien</h1>
     </a>
@@ -9,7 +9,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav  p-4 p-lg-0">
-            <a href="{{ route('home') }}" class="nav-item nav-link active">Home</a>
+            <a href="{{ route('index') }}" class="nav-item nav-link active">Home</a>
             <a href="{{ route('register') }}" class="nav-item nav-link">Register</a>
             <a href="{{ route('login') }}" class="nav-item nav-link">Login</a>
         </div>

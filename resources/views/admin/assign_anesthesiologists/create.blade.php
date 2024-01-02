@@ -94,15 +94,15 @@
                         var options = {
                             hour: 'numeric',
                             minute: 'numeric',
-                            hour12: true
+                            hour12: true,
                         };
 
                         var select =
                             '<option selected disabled>Select Schedule</option>';
 
                         response.schedules.forEach(function(row) {
-                            select += '<option value="' + row.id + '">' +new Date(row.start).toLocaleString('en-US', options) +
-                                ' to ' + row.end + '</option>';
+                            select += '<option value="' + row.id + '">' + new Date(row.start).toLocaleString('en-US', options) +
+                                ' to ' + new Date(row.end).toLocaleString('en-US', options) + '</option>';
                         });
                         schedule.html(select);
 

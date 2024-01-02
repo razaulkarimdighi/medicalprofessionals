@@ -27,7 +27,7 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', function () {
     // return redirect()->route('login');
     return view('frontend.index');
-});
+})->name('index');
 
 
 Auth::routes();
