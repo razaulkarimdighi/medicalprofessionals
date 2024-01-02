@@ -41,11 +41,11 @@
                     </a>
                 </li>
 
-                {{-- <li>
+               <li>
                     <a href="{{ route('admin.get.all.schedule') }}" class="waves-effect">
                         <i class="fa fa-calendar" aria-hidden="true"></i><span> All Schedules </span>
                     </a>
-                </li> --}}
+                </li>
 
                 <li>
                     <a href="{{ route('admin.assign_anesthesiologists.index') }}" class="waves-effect">

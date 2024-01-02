@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\ScheduleDataTableForAdmin;
 use Illuminate\Http\Request;
 use App\DataTables\ScheduleDataTable;
 use App\Http\Requests\ScheduleRequest;
@@ -106,18 +107,13 @@ class ScheduleController extends Controller
 
 
     //Show all schedule to admin;
-    public function showAllSchedule(){
-        $events = Array();
-        $schedules = Schedule::all();
-        foreach($schedules as $schedule){
-            $events[]=[
-                      'title' => $schedule->user->first_name.' '.$schedule->user->last_name,
-                      'start' => $schedule->start,
-                      'end' => $schedule->end
-                    ];
-        }
+    public function showAllSchedule(ScheduleDataTableForAdmin $dataTable){
+        set_page_meta('Schedules');
+        return $dataTable->render('admin.schedule.index');
+    }
 
-        set_page_meta('Schedule');
-        return view('admin.schedule.index', ['events' => $events]);
+    public function showAnesthesiologistSchedule(ScheduleDataTableForAdmin $dataTable){
+        set_page_meta('Schedules');
+        return $dataTable->render('admin.schedule.index');
     }
 }

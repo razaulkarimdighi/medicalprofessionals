@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Assignment;
 use App\Models\Schedule;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -36,10 +37,12 @@ class HomeController extends Controller
             $medical_practitioners = User::where('user_type',User::USER_TYPE_MEDICAL_PRACTICES)->count();
             $notAssignedSchedule = Schedule::where('status',Schedule::NOT_ASSIGNED_SCHEDULE)->count();
             $assignedSchedule = Schedule::where('status',Schedule::ASSIGNED_SCHEDULE)->count();
+            $assignedSchedules = Assignment::all();
             $totalUser = $anesthesiologists +  $medical_practitioners;
-            foreach ($schedules as $schedule) {
+            foreach ($assignedSchedules as $schedule) {
+
                 $events[] = [
-                    'title' => $schedule->user->first_name . ' ' . $schedule->user->last_name,
+                    'title' => 'A:'.' '.$schedule->anesthesiologist->first_name . ' ' . $schedule->anesthesiologist->last_name .' '. 'M:'. ' ' . $schedule->practicioner->first_name . ' ' . $schedule->practicioner->last_name,
                     'start' => $schedule->start,
                     'end' => $schedule->end
                 ];
@@ -47,14 +50,14 @@ class HomeController extends Controller
             return view('admin.dashboard.admin.index', compact('events','totalUser','totalSchedule', 'notAssignedSchedule','assignedSchedule'));
         } elseif (Auth::user()->user_type == User::USER_TYPE_ANESTHEIOLOGISTS) {
             $events = array();
-            $schedules = Schedule::where('user_id','=', Auth::user()->id)->get();
+            $schedules = Assignment::where('anesthesiologist_id','=', Auth::user()->id)->get();
             $user_schedules = Schedule::where('user_id','=', Auth::user()->id)->count();
 
             $notAssignedSchedule = Schedule::where('user_id','=', Auth::user()->id)->where('status',Schedule::NOT_ASSIGNED_SCHEDULE)->count();
             $assignedSchedule = Schedule::where('user_id','=', Auth::user()->id)->where('status',Schedule::ASSIGNED_SCHEDULE)->count();
             foreach ($schedules as $schedule) {
                 $events[] = [
-                    'title' => $schedule->user->first_name . ' ' . $schedule->user->last_name,
+                    'title' => $schedule->practicioner->first_name . ' ' . $schedule->practicioner->last_name,
                     'start' => $schedule->start,
                     'end' => $schedule->end
                 ];
