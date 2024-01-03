@@ -135,10 +135,6 @@
                     left: 'agendaDay, basicWeek',
                     center: 'title',
                     right: 'prev,next today',
-                    dayMinWidth: 150,
-                    stickyFooterScrollbar : true,
-                    dayMinWidth : guarantees
-
                 },
                 events: events,
                 eventRender: function(event, element) {
