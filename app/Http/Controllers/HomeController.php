@@ -42,7 +42,7 @@ class HomeController extends Controller
             foreach ($assignedSchedules as $schedule) {
 
                 $events[] = [
-                    'title' => $schedule->anesthesiologist->first_name . ' ' . $schedule->anesthesiologist->last_name . ' with ' . $schedule->practicioner->first_name . ' ' . $schedule->practicioner->last_name,
+                    'title' => $schedule->anesthesiologist->first_name . ' ' . $schedule->anesthesiologist->last_name .'<br/>'. ' with ' .'</br>'.$schedule->practicioner->first_name . ' ' . $schedule->practicioner->last_name,
                     'start' => $schedule->start,
                     'end' => $schedule->end
                 ];

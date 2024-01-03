@@ -77,24 +77,33 @@
 
         .fc-event,
         .fc-event-dot {
-            background-color: #0463FA;
+            background-color: #448cff;
             padding: 2px;
             font-size: 14px;
             color: #ffffff;
         }
+
+        .fc-event .fc-bg{
+            opacity: 0;
+        }
+
         .fc-unthemed td.fc-today {
             background: #f8f8f8;
         }
+
         .fc-time-grid-event {
             width: 150px;
             text-align: center;
         }
 
         .fc-content {
-            position: absolute;
+            /* position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%); */
+        }
+        .fc-day-grid-event .fc-time{
+            font-weight: 400;
         }
 
         body {
@@ -123,8 +132,8 @@
                 aspectRatio: 1.5,
                 editable: false,
                 header: {
-                    left: 'title',
-                    center: '',
+                    left: 'agendaDay, basicWeek',
+                    center: 'title',
                     right: 'prev,next today',
 
                 },
