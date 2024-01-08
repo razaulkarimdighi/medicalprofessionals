@@ -29,6 +29,15 @@
                                 <p class="error">{{ $message }}</p>
                                 @enderror
                             </div>
+                            <div class="mb-3 col-md-4">
+                                <label class="form-label">Type of Anaesthesiology<span class="error">*</span></label>
+                                {{-- <input type="text" name="available_date" class="form-control" placeholder="Enter your available date" --}}
+                                <input type="text" name="anesthesiology_type" class="form-control" placeholder="Enter Type of Anesthesiology"
+                                       value="{{ old('anesthesiology_type') }}">
+                                @error('anesthesiology_type')
+                                <p class="error">{{ $message }}</p>
+                                @enderror
+                            </div>
                         <div class="row">
                             <div class="mb-3 offset-md-6 col-md-6">
                                 <div class="text-end">

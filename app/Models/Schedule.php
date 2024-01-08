@@ -16,6 +16,7 @@ class Schedule extends Model
         'start',
         'end',
         'user_id',
+        'anesthesiology_type',
         'status'
     ];
 

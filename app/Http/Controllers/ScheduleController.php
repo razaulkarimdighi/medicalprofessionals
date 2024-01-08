@@ -49,7 +49,7 @@ class ScheduleController extends Controller
         try {
         $this->scheduleService->storeOrUpdate($data, null);
         record_created_flash();
-        return redirect()->route('admin.get.prectitioner.schedule');
+        return redirect()->route('admin.get.anesthesiologist.schedule');
         } catch (\Exception $e) {
         }
 

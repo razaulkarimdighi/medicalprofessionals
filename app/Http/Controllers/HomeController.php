@@ -59,7 +59,10 @@ class HomeController extends Controller
                 $events[] = [
                     'title' => $schedule->practicioner->first_name . ' ' . $schedule->practicioner->last_name,
                     'start' => $schedule->start,
-                    'end' => $schedule->end
+                    'end' => $schedule->end,
+                    'location' => $schedule->practicioner->location,
+                    'phone' => $schedule->practicioner->phone,
+                    'email' => $schedule->practicioner->email,
                 ];
             }
             return view('admin.dashboard.anasthesiologist.index', compact('events','schedules','user_schedules','notAssignedSchedule','assignedSchedule'));
@@ -74,7 +77,10 @@ class HomeController extends Controller
                 $events[] = [
                     'title' => $schedule->anesthesiologist->first_name . ' ' . $schedule->anesthesiologist->last_name,
                     'start' => $schedule->start,
-                    'end' => $schedule->end
+                    'end' => $schedule->end,
+                    'location' => $schedule->anesthesiologist->location,
+                    'phone' => $schedule->anesthesiologist->phone,
+                    'email' => $schedule->anesthesiologist->email,
                 ];
             }
             return view('admin.dashboard.medical.index', compact('events','schedules','user_schedules','notAssignedSchedule','assignedSchedule'));

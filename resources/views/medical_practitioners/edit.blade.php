@@ -7,9 +7,8 @@
                 <div class="card-body">
                     <h4 class="card-title mb-3">{{get_page_meta('title', true)}}</h4>
 
-                    <form action="{{ route('admin.schedules.update',$schedule->id) }}" method="post">
+                    <form action="{{ route('admin.update',$schedule->id) }}" method="post">
                         @csrf
-                        @method('PUT')
 
                         <div class="row">
                             <div class="mb-3 col-md-4">
@@ -27,6 +26,15 @@
                                 <input type="datetime-local" name="end" class="form-control" placeholder="Enter your end time"
                                        value="{{ old('end') }}">
                                 @error('end')
+                                <p class="error">{{ $message }}</p>
+                                @enderror
+                            </div>
+                            <div class="mb-3 col-md-4">
+                                <label class="form-label">Type of Anaesthesiology<span class="error">*</span></label>
+                                {{-- <input type="text" name="available_date" class="form-control" placeholder="Enter your available date" --}}
+                                <input type="text" name="anesthesiology_type" class="form-control" placeholder="Enter Type of Anesthesiology"
+                                       value="{{ old('anesthesiology_type') }}">
+                                @error('anesthesiology_type')
                                 <p class="error">{{ $message }}</p>
                                 @enderror
                             </div>

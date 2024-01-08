@@ -97,6 +97,7 @@ class ScheduleDataTableForMedicalPractitioner extends DataTable
 //            Column::computed('DT_RowIndex', 'SL#'),
             Column::make('start', 'start')->title('Start'),
             Column::make('end', 'end')->title('End'),
+            Column::make('anesthesiology_type', 'anesthesiology_type')->title('Anesthesiology Type'),
             Column::make('status', 'status')->title('Status'),
         ];
     }

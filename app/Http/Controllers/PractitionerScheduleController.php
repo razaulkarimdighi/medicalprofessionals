@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PractitionerScheduleRequest;
 use Illuminate\Http\Request;
 use App\DataTables\PractitionerScheduleDataTable;
 use App\Http\Requests\ScheduleRequest;
@@ -33,23 +34,23 @@ class PractitionerScheduleController extends Controller
     public function create()
     {
         set_page_meta('Create Schedule');
-        return view('anesthesiologist.create');
+        return view('medical_practitioners.create');
+
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ScheduleRequest $request)
+    public function store(PractitionerScheduleRequest $request)
     {
         $data = $request->validated();
         $data['user_id'] = Auth::user()->id;
         try {
-        $this->scheduleService->storeOrUpdate($data, null);
-        record_created_flash();
-
+            $this->scheduleService->storeOrUpdate($data, null);
+            record_created_flash();
         } catch (\Exception $e) {
         }
-        return redirect()->route('admin.schedules.index');
+        return redirect()->route('admin.get.prectitioner.schedule');
     }
 
     /**
@@ -68,7 +69,7 @@ class PractitionerScheduleController extends Controller
         try {
             set_page_meta('Edit Schedule');
             $schedule = $this->scheduleService->get($id);
-            return view('anesthesiologist.edit', compact('schedule'));
+            return view('medical_practitioners.edit', compact('schedule'));
         } catch (\Exception $e) {
             log_error($e);
         }

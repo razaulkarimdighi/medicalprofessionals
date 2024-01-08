@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ScheduleRequest extends FormRequest
+class PractitionerScheduleRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,6 +24,7 @@ class ScheduleRequest extends FormRequest
         $rules =  [
             'start' => ['required'],
             'end' => ['required'],
+            'anesthesiology_type' => ['required'],
         ];
         return $rules;
     }
