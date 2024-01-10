@@ -16,7 +16,7 @@
                                 <label class="form-label"> Start Time <span class="error">*</span></label>
                                 {{-- <input type="text" name="available_date" class="form-control" placeholder="Enter your available date" --}}
                                 <input type="datetime-local" name="start" class="form-control" placeholder="Enter your start time"
-                                       value="{{ old('start') }}">
+                                       value="{{ $schedule->start }}">
                                 @error('start')
                                 <p class="error">{{ $message }}</p>
                                 @enderror
@@ -25,7 +25,7 @@
                                 <label class="form-label"> End <span class="error">*</span></label>
                                 {{-- <input type="text" name="available_date" class="form-control" placeholder="Enter your available date" --}}
                                 <input type="datetime-local" name="end" class="form-control" placeholder="Enter your end time"
-                                       value="{{ old('end') }}">
+                                       value="{{ $schedule->end }}">
                                 @error('end')
                                 <p class="error">{{ $message }}</p>
                                 @enderror

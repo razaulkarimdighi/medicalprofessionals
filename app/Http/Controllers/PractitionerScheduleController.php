@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PractitionerScheduleRequest;
 use Illuminate\Http\Request;
 use App\DataTables\PractitionerScheduleDataTable;
+use App\DataTables\ScheduleDataTableForMedicalPractitioner;
 use App\Http\Requests\ScheduleRequest;
 use App\Models\Schedule;
 use App\Services\PractitionerScheduleService;
@@ -22,7 +23,7 @@ class PractitionerScheduleController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(PractitionerScheduleDataTable $dataTable)
+    public function index(ScheduleDataTableForMedicalPractitioner $dataTable)
     {
         set_page_meta('Schedule');
         return $dataTable->render('medical_practitioners.index');

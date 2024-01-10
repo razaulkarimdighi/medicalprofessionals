@@ -2,6 +2,45 @@
 
 
 @section('content')
+<div class="modal fade" id="scheduleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Details</h5>
+                    <button type="button" class="close close_btn" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Anesthesiologist Name</th>
+                                <th scope="col">Practitioner Name</th>
+                                <th scope="col">Phone</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Location</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td id="anesthesiologist_name"></td>
+                                <td id="practitioner_name"></td>
+                                <td id="phone"></td>
+                                <td id="email"></td>
+                                <td id="location"></td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary close_btn" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="mb-5">
         <div class="row">
             <div class="col-xl-3 col-md-6">
@@ -134,6 +173,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
     <script>
         $(document).ready(function() {
             var events = @json($events);
@@ -144,6 +186,8 @@
                 slotLabelInterval: '01:00:00', // Show time labels every hour
                 aspectRatio: 1.5,
                 editable: false,
+                selectable: true,
+                selectHelper: true,
                 header: {
                     left: 'agendaDay, basicWeek',
                     center: 'title',
@@ -158,7 +202,22 @@
                     eventInfo += '<div class="fc-time">' + startTime + ' - ' + endTime +
                         '</div>'; // Start and end time
                     element.find('.fc-content').html(eventInfo); // Replace content with title and times
+                },
+                eventClick: function(calEvent, jsEvent, view) {
+                    console.log(calEvent),
+                     $('#anesthesiologist_name').text(calEvent.anesthesiologist_name);
+                     $('#practitioner_name').text(calEvent.practitioner_name);
+                     $('#phone').text(calEvent.phone);
+                     $('#email').text(calEvent.email);
+                     $('#location').text(calEvent.location);
+
+                    $('#scheduleModal2').modal('toggle')
+
                 }
+
+            });
+            $(".close_btn").click(function() {
+                $('#scheduleModal2').modal('toggle')
             });
         });
     </script>

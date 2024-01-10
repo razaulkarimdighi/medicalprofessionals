@@ -44,7 +44,12 @@ class HomeController extends Controller
                 $events[] = [
                     'title' => $schedule->anesthesiologist->first_name . ' ' . $schedule->anesthesiologist->last_name .'<br/>'. ' with ' .'</br>'.$schedule->practicioner->first_name . ' ' . $schedule->practicioner->last_name,
                     'start' => $schedule->start,
-                    'end' => $schedule->end
+                    'end' => $schedule->end,
+                    'location' => $schedule->practicioner->location,
+                    'anesthesiologist_name' => $schedule->anesthesiologist->first_name .' '.$schedule->anesthesiologist->last_name,
+                    'practitioner_name' => $schedule->practicioner->first_name .' '.$schedule->practicioner->last_name,
+                    'phone' => $schedule->practicioner->phone,
+                    'email' => $schedule->practicioner->email,
                 ];
             }
             return view('admin.dashboard.admin.index', compact('events','totalUser','totalSchedule', 'notAssignedSchedule','assignedSchedule'));

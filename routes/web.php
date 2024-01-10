@@ -43,7 +43,7 @@ Route::prefix('admin')->as('admin.')->group(function () {
     //SCHEDULE
     Route::resource('schedules', ScheduleController::class);
     //Practitioner Schedule
-    Route::resource('all/medical-practitioner/schedules/', PractitionerScheduleController::class);
+    Route::resource('practitioners', PractitionerScheduleController::class);
 
     //All Schedules to show admin
     Route::get('/get/all/schedule/to/show', [ScheduleController::class,'showAllSchedule'])->name('get.all.schedule');

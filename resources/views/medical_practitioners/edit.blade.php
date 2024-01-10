@@ -7,7 +7,7 @@
                 <div class="card-body">
                     <h4 class="card-title mb-3">{{get_page_meta('title', true)}}</h4>
 
-                    <form action="{{ route('admin.update',$schedule->id) }}" method="post">
+                    <form action="{{ route('admin.practitioners.update',$schedule->id) }}" method="post">
                         @csrf
 
                         <div class="row">
@@ -15,7 +15,7 @@
                                 <label class="form-label"> Start Time <span class="error">*</span></label>
                                 {{-- <input type="text" name="available_date" class="form-control" placeholder="Enter your available date" --}}
                                 <input type="datetime-local" name="start" class="form-control" placeholder="Enter your start time"
-                                       value="{{ old('start') }}">
+                                       value="{{ $schedule->start }}">
                                 @error('start')
                                 <p class="error">{{ $message }}</p>
                                 @enderror
@@ -24,7 +24,7 @@
                                 <label class="form-label"> End <span class="error">*</span></label>
                                 {{-- <input type="text" name="available_date" class="form-control" placeholder="Enter your available date" --}}
                                 <input type="datetime-local" name="end" class="form-control" placeholder="Enter your end time"
-                                       value="{{ old('end') }}">
+                                       value="{{ $schedule->end }}">
                                 @error('end')
                                 <p class="error">{{ $message }}</p>
                                 @enderror
@@ -33,7 +33,7 @@
                                 <label class="form-label">Type of Anaesthesiology<span class="error">*</span></label>
                                 {{-- <input type="text" name="available_date" class="form-control" placeholder="Enter your available date" --}}
                                 <input type="text" name="anesthesiology_type" class="form-control" placeholder="Enter Type of Anesthesiology"
-                                       value="{{ old('anesthesiology_type') }}">
+                                       value="{{ $schedule->anesthesiology_type }}">
                                 @error('anesthesiology_type')
                                 <p class="error">{{ $message }}</p>
                                 @enderror
@@ -45,7 +45,7 @@
                                         <i class="fa fa-save"></i> Save
                                     </button>
 
-                                    <a class="btn btn-secondary waves-effect" href="{{ route('admin.schedules.index') }}">
+                                    <a class="btn btn-secondary waves-effect" href="{{ route('admin.practitioners.index') }}">
                                         <i class="fa fa-times"></i> Cancel
                                     </a>
                                 </div>
