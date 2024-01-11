@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->nullable();
             $table->dateTime('start');
             $table->dateTime('end');
+            $table->string('honorary_note')->nullable();
             $table->string('anesthesiology_type')->nullable();
             $table->string('status')->default('not_assigned');
             $table->timestamps();

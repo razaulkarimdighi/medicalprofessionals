@@ -109,9 +109,33 @@ class ScheduleController extends Controller
 
 
     //Show all schedule to admin;
-    public function showAllSchedule(ScheduleDataTableForAdmin $dataTable){
+    public function showAllSchedule(){
         set_page_meta('Schedules');
-        return $dataTable->render('admin.schedule.index');
+        if (Auth::user()->user_type == User::USER_TYPE_ADMIN) {
+            $events = array();
+           $schedules = Schedule::all();
+            foreach ($schedules as $schedule) {
+
+                $events[] = [
+                    'title' => $schedule->user->first_name.' '.$schedule->user->last_name,
+                    'user_type' => $schedule->user->user_type,
+                    'start' => $schedule->start,
+                    'end' => $schedule->end,
+                    'phone' => $schedule->user->phone,
+                    'email' => $schedule->user->email,
+                    'location' => $schedule->user->location,
+                    'type_of_nesthesiology' => $schedule->anesthesiology_type,
+                    'schedule_id' => $schedule->id,
+
+                    // 'location' => $schedule->practicioner->location,
+                    // 'anesthesiologist_name' => $schedule->anesthesiologist->first_name .' '.$schedule->anesthesiologist->last_name,
+                    // 'practitioner_name' => $schedule->practicioner->first_name .' '.$schedule->practicioner->last_name,
+                    // 'phone' => $schedule->practicioner->phone,
+                    // 'email' => $schedule->practicioner->email,
+                ];
+            }
+            return view('admin.dashboard.admin.calender', compact('events'));
+        }
     }
 
     //Show schedules to anesthesiologist;

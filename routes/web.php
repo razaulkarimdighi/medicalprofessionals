@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\Profile\UserProfileController;
 use App\Http\Controllers\Admin\User\UsersController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\HonoraryNoteController;
 use App\Http\Controllers\PractitionerScheduleController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ScheduleController;
@@ -76,6 +77,10 @@ Route::prefix('admin')->as('admin.')->group(function () {
 
     //Medical Practitioners
     Route::resource('medical_practitioners', MedicalPractitionerController::class);
+    //Honorary Note
+    Route::resource('honorary-notes', HonoraryNoteController::class);
+    //Honorary Note Update By admin
+    Route::post('/honorary/notes/update/by/admin/{id}', [HonoraryNoteController::class, 'updateHonoraryNote']);
     // PROFILE
     Route::get('/profile', [UserProfileController::class, 'index'])->name('profile.info');
     Route::post('/avatar/update', [UserProfileController::class, 'avatarUpdate'])->name('avatar.update');
