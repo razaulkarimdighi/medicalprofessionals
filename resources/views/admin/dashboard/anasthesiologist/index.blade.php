@@ -128,6 +128,7 @@
             padding: 2px;
             font-size: 14px;
             color: #ffffff;
+            cursor: pointer;
         }
 
         .fc-event .fc-bg {
@@ -189,8 +190,8 @@
                 editable: false,
                 navLinks: true, // can click day/week names to navigate views
                 eventLimit: true, // allow "more" link when too many events
-                selectable: true,
-                selectHelper: true,
+                selectable: false,
+                selectHelper: false,
                 header: {
                     left: 'agendaDay, basicWeek',
                     center: 'title',

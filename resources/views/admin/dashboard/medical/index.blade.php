@@ -122,6 +122,7 @@
             padding: 2px;
             font-size: 14px;
             color: #ffffff;
+            cursor: pointer;
         }
 
         .fc-event .fc-bg {
@@ -181,8 +182,8 @@
                 slotLabelInterval: '01:00:00', // Show time labels every hour
                 aspectRatio: 1.5,
                 editable: false,
-                selectable: true,
-                selectHelper: true,
+                selectable: false,
+                selectHelper: false,
                 header: {
                     left: 'agendaDay, basicWeek',
                     center: 'title',
