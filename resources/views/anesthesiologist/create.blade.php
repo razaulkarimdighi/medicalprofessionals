@@ -6,7 +6,7 @@
                 <div class="card-body">
                     <h4 class="card-title mb-3">{{ get_page_meta('title', true) }}</h4>
 
-                    <form action="{{ route('admin.schedules.store') }}" method="post">
+                    <form action="{{ route('admin.schedules.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="mb-3 col-md-4">

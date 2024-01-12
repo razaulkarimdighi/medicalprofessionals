@@ -7,7 +7,7 @@
                 <div class="card-body">
                     <h4 class="card-title mb-3">{{get_page_meta('title', true)}}</h4>
 
-                    <form action="{{ route('admin.store') }}" method="post">
+                    <form action="{{ route('admin.practitioners.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
 
                         <div class="row">
@@ -29,6 +29,7 @@
                                 <p class="error">{{ $message }}</p>
                                 @enderror
                             </div>
+
                             <div class="mb-3 col-md-4">
                                 <label class="form-label">Type of Anaesthesiology<span class="error">*</span></label>
                                 {{-- <input type="text" name="available_date" class="form-control" placeholder="Enter your available date" --}}
@@ -38,6 +39,20 @@
                                 <p class="error">{{ $message }}</p>
                                 @enderror
                             </div>
+
+                            <div class="mb-3 col-md-4">
+                                <label class="form-label"> Honorary Note <span class="error">*</span></label>
+                                <input type="file" name="honorary_note" class="form-control @error('honorary_note') is-invalid @enderror" autocomplete="honorary_note">
+
+                                @error('honorary_note')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+
+
+
                         <div class="row">
                             <div class="mb-3 offset-md-6 col-md-6">
                                 <div class="text-end">

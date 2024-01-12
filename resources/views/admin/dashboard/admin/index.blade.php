@@ -110,59 +110,6 @@
     </div>
 @endsection
 
-@push('style')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.css" />
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    <style>
-        div.fc-title {
-            color: #ffffff;
-            font-size: 14px;
-        }
-
-        div.fc-time {
-            color: #ffffff;
-            font-size: 14px;
-        }
-
-        .fc-event,
-        .fc-event-dot {
-            background-color: #448cff;
-            padding: 2px;
-            font-size: 14px;
-            color: #ffffff;
-        }
-
-        .fc-event .fc-bg{
-            opacity: 0;
-        }
-
-        .fc-unthemed td.fc-today {
-            background: #f8f8f8;
-        }
-
-        .fc-time-grid-event {
-            width: 150px;
-            text-align: center;
-        }
-
-        .fc-content {
-            /* position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%); */
-        }
-        .fc-day-grid-event .fc-time{
-            font-weight: 400;
-        }
-
-        body {
-            background-color: #f8f8fa;
-        }
-    </style>
-@endpush
 
 @push('script')
     <!-- Chart JS -->
@@ -186,8 +133,8 @@
                 slotLabelInterval: '01:00:00', // Show time labels every hour
                 aspectRatio: 1.5,
                 editable: false,
-                selectable: true,
-                selectHelper: true,
+                selectable: false,
+                selectHelper: false,
                 header: {
                     left: 'agendaDay, basicWeek',
                     center: 'title',
@@ -222,3 +169,59 @@
         });
     </script>
 @endpush
+
+@push('style')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.css" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+        div.fc-title {
+            color: #ffffff;
+            font-size: 14px;
+        }
+
+        div.fc-time {
+            color: #ffffff;
+            font-size: 14px;
+        }
+
+        .fc-event,
+        .fc-event-dot {
+            background-color: #448cff;
+            padding: 2px;
+            font-size: 14px;
+            color: #ffffff;
+            cursor: pointer;
+        }
+
+        .fc-event .fc-bg{
+            opacity: 0;
+        }
+
+        .fc-unthemed td.fc-today {
+            background: #f8f8f8;
+        }
+
+        .fc-time-grid-event {
+            width: 150px;
+            text-align: center;
+        }
+
+        .fc-content {
+            /* position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); */
+        }
+        .fc-day-grid-event .fc-time{
+            font-weight: 400;
+        }
+
+        body {
+            background-color: #f8f8fa;
+        }
+    </style>
+@endpush
+

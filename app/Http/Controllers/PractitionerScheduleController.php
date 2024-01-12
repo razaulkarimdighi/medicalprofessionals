@@ -10,13 +10,16 @@ use App\Http\Requests\ScheduleRequest;
 use App\Models\Schedule;
 use App\Services\PractitionerScheduleService;
 use Illuminate\Support\Facades\Auth;
+use App\Services\Utils\FileUploadService;
 use App\Models\User;
 
 class PractitionerScheduleController extends Controller
 {
     protected $scheduleService;
+    protected $fileUploadService;
 
-    public function __construct(PractitionerScheduleService $scheduleService)
+
+    public function __construct(PractitionerScheduleService $scheduleService, FileUploadService $fileUploadService)
     {
         $this->scheduleService = $scheduleService;
     }
@@ -44,14 +47,38 @@ class PractitionerScheduleController extends Controller
      */
     public function store(PractitionerScheduleRequest $request)
     {
-        $data = $request->validated();
-        $data['user_id'] = Auth::user()->id;
+        //$data = $request->validated();
+        //$data['user_id'] = Auth::user()->id;
         try {
-            $this->scheduleService->storeOrUpdate($data, null);
-            record_created_flash();
-        } catch (\Exception $e) {
-        }
-        return redirect()->route('admin.get.prectitioner.schedule');
+            $schedule = Schedule::create([
+                'user_id'=> Auth::user()->id,
+                'start' => $request['start'],
+                'end' => $request['end'],
+                'anesthesiology_type' => $request['anesthesiology_type'],
+                'honorary_note' => $request['honorary_note'],
+            ]);
+            if ($schedule) {
+                $image = $this->fileUploadService->upload($request['honorary_note'], Schedule::FILE_STORE_HONORARY_PATH, false, true);
+                dd($image);
+                $schedule->honorary_note = $image;
+                $schedule->save();
+            }
+
+             record_created_flash();
+             return redirect()->route('admin.practitioners.index');
+         } catch (\Exception $e) {
+         }
+
+
+
+        // $data = $request->validated();
+        // $data['user_id'] = Auth::user()->id;
+        // try {
+        //     $this->scheduleService->storeOrUpdate($data, null);
+        //     record_created_flash();
+        // } catch (\Exception $e) {
+        // }
+        // return redirect()->route('admin.get.prectitioner.schedule');
     }
 
     /**

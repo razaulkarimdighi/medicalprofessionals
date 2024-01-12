@@ -25,6 +25,7 @@ class PractitionerScheduleRequest extends FormRequest
             'start' => ['required'],
             'end' => ['required'],
             'anesthesiology_type' => ['required'],
+            'honorary_note' => ['required'],
         ];
         return $rules;
     }

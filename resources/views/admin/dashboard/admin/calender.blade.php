@@ -23,6 +23,7 @@
                                 <th scope="col">Email</th>
                                 <th scope="col">Location</th>
                                 <th scope="col">Type of Anesthesiology</th>
+                                <th scope="col">Honorary Note</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -33,11 +34,16 @@
                                 <td id="email"></td>
                                 <td id="location"></td>
                                 <td id="type_of_nesthesiology"></td>
-                                {{-- <td id="schedule_id"></td> --}}
-
+                                <td id="honor_note"></td>
                             </tr>
                         </tbody>
                     </table>
+                    {{-- Show Honorary Note --}}
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe class="embed-responsive-item" id="" allowfullscreen>
+
+                        </iframe>
+                    </div>
                 </div>
 
                 <div class="modal-footer">
@@ -173,8 +179,8 @@
                 slotLabelInterval: '01:00:00', // Show time labels every hour
                 aspectRatio: 1.5,
                 editable: false,
-                selectable: true,
-                selectHelper: true,
+                //selectable: true,
+                // selectHelper: true,
                 header: {
                     left: 'agendaDay, basicWeek',
                     center: 'title',
@@ -198,6 +204,7 @@
                     $('#location').text(calEvent.location);
                     $('#type_of_nesthesiology').text(calEvent.type_of_nesthesiology);
                     $('#user_type').text(calEvent.user_type);
+                    $('#honor_note').text(calEvent.honorary_note);
                     $('#schedule_id').val(calEvent.schedule_id);
                     $('#scheduleModal2').modal('toggle')
 
@@ -277,6 +284,10 @@
             font-size: 14px;
         }
 
+        .fc-event {
+            cursor: pointer;
+        }
+
         .fc-event,
         .fc-event-dot {
             background-color: #448cff;
@@ -300,9 +311,9 @@
 
         .fc-content {
             /* position: absolute;
-                            top: 50%;
-                            left: 50%;
-                            transform: translate(-50%, -50%); */
+                                top: 50%;
+                                left: 50%;
+                                transform: translate(-50%, -50%); */
         }
 
         .fc-day-grid-event .fc-time {

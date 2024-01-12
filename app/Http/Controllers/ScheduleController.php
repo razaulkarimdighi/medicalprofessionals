@@ -47,13 +47,21 @@ class ScheduleController extends Controller
      */
     public function store(ScheduleRequest $request)
     {
-        $data = $request->validated();
-        $data['user_id'] = Auth::user()->id;
+        //$data = $request->validated();
+        //$data['user_id'] = Auth::user()->id;
         try {
-            $this->scheduleService->storeOrUpdate($data, null);
-            $image = $this->fileUploadService->upload($data['honorary_note'], Schedule::FILE_STORE_HONORARY_PATH, false, true);
-            $data->honorary_note = $image;
-            $data->save();
+           //$schedule = $this->scheduleService->storeOrUpdate($data, null);
+           $schedule = Schedule::create([
+            'user_id'=> Auth::user()->id,
+            'start' => $request['start'],
+            'end' => $request['end'],
+            'honorary_note' => $request['honorary_note'],
+        ]);
+           if ($schedule) {
+            $image = $this->fileUploadService->upload($request['honorary_note'], Schedule::FILE_STORE_HONORARY_PATH, false, true);
+            $schedule->honorary_note = $image;
+            $schedule->save();
+        }
             record_created_flash();
             return redirect()->route('admin.get.anesthesiologist.schedule');
         } catch (\Exception $e) {
@@ -132,7 +140,7 @@ class ScheduleController extends Controller
                     'location' => $schedule->user->location,
                     'type_of_nesthesiology' => $schedule->anesthesiology_type,
                     'schedule_id' => $schedule->id,
-                    // 'location' => $schedule->practicioner->location,
+                    'honorary_note' => $schedule->honorary_note,
                     // 'anesthesiologist_name' => $schedule->anesthesiologist->first_name .' '.$schedule->anesthesiologist->last_name,
                     // 'practitioner_name' => $schedule->practicioner->first_name .' '.$schedule->practicioner->last_name,
                     // 'phone' => $schedule->practicioner->phone,
