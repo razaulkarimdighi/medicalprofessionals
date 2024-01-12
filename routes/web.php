@@ -80,7 +80,7 @@ Route::prefix('admin')->as('admin.')->group(function () {
     //Honorary Note
     Route::resource('honorary-notes', HonoraryNoteController::class);
     //Honorary Note Update By admin
-    Route::post('/honorary/notes/update/by/admin/{id}', [HonoraryNoteController::class, 'updateHonoraryNote']);
+    Route::post('/honorary/notes/update/by/admin', [HonoraryNoteController::class, 'updateHonoraryNote'])->name('update.honorary.note');
     // PROFILE
     Route::get('/profile', [UserProfileController::class, 'index'])->name('profile.info');
     Route::post('/avatar/update', [UserProfileController::class, 'avatarUpdate'])->name('avatar.update');

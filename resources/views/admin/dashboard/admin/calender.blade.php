@@ -23,7 +23,6 @@
                                 <th scope="col">Email</th>
                                 <th scope="col">Location</th>
                                 <th scope="col">Type of Anesthesiology</th>
-                                <th scope="col">Schedule Id</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -65,12 +64,10 @@
                         @csrf
                         <div class="form-group">
                             <label for="exampleInputEmail1">Upload</label>
-                            <input type="text" name="schedule_id" id="schedule_id" value="">
-                            <input type="file" name="honorary_note" class="form-control" id="exampleInputEmail1"
+                            <input type="hidden" name="schedule_id" id="schedule_id" value="">
+                            <input type="file" name="file" class="form-control" id="exampleInputEmail1"
                                 aria-describedby="emailHelp" placeholder="Enter email">
-                            @error('honorary_note')
-                                <p class="error">{{ $message }}</p>
-                            @enderror
+                            <span class="error" id="error"></span>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
@@ -229,24 +226,31 @@
             $('#submit_honorary').submit(function(e) {
                 e.preventDefault();
                 var schedule_id = $('#schedule_id').val();
+                $('#error').text('');
                 var formData = new FormData(this);
-                console.log(formData);
                 $.ajax({
                     type: 'POST',
-                    url: "{{ url('photo') }}",
+                    url: " {{ route('admin.update.honorary.note') }} ",
                     data: formData,
-                    cache: false,
                     contentType: false,
                     processData: false,
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: (response) => {
+                        console.log(response)
+                        if (response.response == 403) {
+                            $('#error').text(response.message);
+                        } else {
+                            alert('File Updated');
+                            window.location.reload()
+                        }
+                    },
+                    error: function(response) {
+                        console.log(response);
+                        //$('#error').text(response.responseJSON.message);
                     }
-                    // success: (data) => {
-                    //     this.reset();
-                    // },
-                    // error: function(data) {
-                    //     console.log(data);
-                    // }
+
                 });
             });
 
@@ -296,9 +300,9 @@
 
         .fc-content {
             /* position: absolute;
-                        top: 50%;
-                        left: 50%;
-                        transform: translate(-50%, -50%); */
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%, -50%); */
         }
 
         .fc-day-grid-event .fc-time {

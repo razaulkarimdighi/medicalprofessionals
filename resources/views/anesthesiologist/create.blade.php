@@ -4,7 +4,7 @@
         <div class="col-md-9">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title mb-3">{{get_page_meta('title', true)}}</h4>
+                    <h4 class="card-title mb-3">{{ get_page_meta('title', true) }}</h4>
 
                     <form action="{{ route('admin.schedules.store') }}" method="post">
                         @csrf
@@ -12,34 +12,46 @@
                             <div class="mb-3 col-md-4">
                                 <label class="form-label"> Start Time <span class="error">*</span></label>
                                 {{-- <input type="text" name="available_date" class="form-control" placeholder="Enter your available date" --}}
-                                <input type="datetime-local" name="start" class="form-control" placeholder="Enter your start time"
-                                       value="{{ old('start') }}">
+                                <input type="datetime-local" name="start" class="form-control"
+                                    placeholder="Enter your start time" value="{{ old('start') }}">
                                 @error('start')
-                                <p class="error">{{ $message }}</p>
+                                    <p class="error">{{ $message }}</p>
                                 @enderror
                             </div>
                             <div class="mb-3 col-md-4">
                                 <label class="form-label"> End <span class="error">*</span></label>
                                 {{-- <input type="text" name="available_date" class="form-control" placeholder="Enter your available date" --}}
-                                <input type="datetime-local" name="end" class="form-control" placeholder="Enter your end time"
-                                       value="{{ old('end') }}">
+                                <input type="datetime-local" name="end" class="form-control"
+                                    placeholder="Enter your end time" value="{{ old('end') }}">
                                 @error('end')
-                                <p class="error">{{ $message }}</p>
+                                    <p class="error">{{ $message }}</p>
                                 @enderror
                             </div>
-                        <div class="row">
-                            <div class="mb-3 offset-md-6 col-md-6">
-                                <div class="text-end">
-                                    <button class="btn btn-primary waves-effect waves-lightml-2 me-2" type="submit">
-                                        <i class="fa fa-save"></i> Save
-                                    </button>
+                            <div class="mb-3 col-md-4">
+                                <label class="form-label"> Honorary Note <span class="error">*</span></label>
+                                <input id="honorary_note" type="file"
+                                    class="form-control @error('honorary_note') is-invalid @enderror" name="honorary_note" autocomplete="honorary_note">
 
-                                    <a class="btn btn-secondary waves-effect" href="{{ route('admin.schedules.index') }}">
-                                        <i class="fa fa-times"></i> Cancel
-                                    </a>
+                                @error('honorary_note')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 offset-md-6 col-md-6">
+                                    <div class="text-end">
+                                        <button class="btn btn-primary waves-effect waves-lightml-2 me-2" type="submit">
+                                            <i class="fa fa-save"></i> Save
+                                        </button>
+
+                                        <a class="btn btn-secondary waves-effect"
+                                            href="{{ route('admin.schedules.index') }}">
+                                            <i class="fa fa-times"></i> Cancel
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
                     </form>
                 </div>
@@ -59,7 +71,7 @@
             useCurrent: false,
             format: "hh:mm A"
         }).on('dp.show', function() {
-            if(firstOpen) {
+            if (firstOpen) {
                 time = moment().startOf('day');
                 firstOpen = false;
             } else {
@@ -69,4 +81,3 @@
         });
     </script>
 @endpush
-

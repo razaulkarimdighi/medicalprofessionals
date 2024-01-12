@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('schedules', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->nullable();
-            $table->dateTime('start');
-            $table->dateTime('end');
+            $table->dateTime('start')->nullable();
+            $table->dateTime('end')->nullable();
             $table->string('honorary_note')->nullable();
             $table->string('anesthesiology_type')->nullable();
             $table->string('status')->default('not_assigned');

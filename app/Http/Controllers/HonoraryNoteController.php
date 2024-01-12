@@ -6,12 +6,13 @@ use App\Http\Requests\HonoraryNoteRequest;
 use App\Models\Schedule;
 use App\Services\Utils\FileUploadService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class HonoraryNoteController extends Controller
 {
     protected $fileUploadService;
 
-    public function __construct( FileUploadService $fileUploadService)
+    public function __construct(FileUploadService $fileUploadService)
     {
         $this->fileUploadService = $fileUploadService;
     }
@@ -36,8 +37,6 @@ class HonoraryNoteController extends Controller
      */
     public function store(HonoraryNoteRequest $request)
     {
-
-
     }
 
     /**
@@ -74,7 +73,40 @@ class HonoraryNoteController extends Controller
     {
         //
     }
-    public function updateHonoraryNote( Request $request, $id ){
-        dd($request);
+    public function updateHonoraryNote(Request $request)
+    {
+        // $validator  = $request->validate([
+        //     'schedule_id'=>'required',
+        //     'file'=> 'required|mimes:pdf'
+        // ]);
+
+        $validator = Validator::make($request->all(), [
+            'file' => 'required|mimes:pdf',
+            'schedule_id' => 'required',
+        ]);
+
+
+
+
+        if ($validator->fails()) {
+            $response = [
+                'status' => 'validation error',
+                'response' => 403,
+                'message' => $validator->errors()->first(),
+            ];
+            return response()->json($response);
+        } else {
+            $filename = time() . '.' . $request->file->extension();
+            $request->file->move(public_path('file'), $filename);
+            $schedule = Schedule::find($request->schedule_id);
+            $schedule->honorary_note = $filename;
+            $schedule->save();
+            $response = [
+                'status' => 'success',
+                'response' => 200,
+                'message' => 'File Uploaded Successfully'
+            ];
+            return response()->json($response);
+        }
     }
 }

@@ -24,6 +24,7 @@ class ScheduleRequest extends FormRequest
         $rules =  [
             'start' => ['required'],
             'end' => ['required'],
+            'honorary_note' => ['required'],
         ];
         return $rules;
     }
