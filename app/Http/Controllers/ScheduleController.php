@@ -50,18 +50,18 @@ class ScheduleController extends Controller
         //$data = $request->validated();
         //$data['user_id'] = Auth::user()->id;
         try {
-           //$schedule = $this->scheduleService->storeOrUpdate($data, null);
-           $schedule = Schedule::create([
-            'user_id'=> Auth::user()->id,
-            'start' => $request['start'],
-            'end' => $request['end'],
-            'honorary_note' => $request['honorary_note'],
-        ]);
-           if ($schedule) {
-            $image = $this->fileUploadService->upload($request['honorary_note'], Schedule::FILE_STORE_HONORARY_PATH, false, true);
-            $schedule->honorary_note = $image;
-            $schedule->save();
-        }
+            //$schedule = $this->scheduleService->storeOrUpdate($data, null);
+            $schedule = Schedule::create([
+                'user_id' => Auth::user()->id,
+                'start' => $request['start'],
+                'end' => $request['end'],
+                'honorary_note' => $request['honorary_note'],
+            ]);
+            if ($schedule) {
+                $image = $this->fileUploadService->upload($request['honorary_note'], Schedule::FILE_STORE_HONORARY_PATH, false, true);
+                $schedule->honorary_note = $image;
+                $schedule->save();
+            }
             record_created_flash();
             return redirect()->route('admin.get.anesthesiologist.schedule');
         } catch (\Exception $e) {
@@ -98,9 +98,24 @@ class ScheduleController extends Controller
     {
         $data = $request->validated();
         try {
-            $this->scheduleService->storeOrUpdate($data, $id);
+
+            $schedule = Schedule::find($id);
+            $schedule->user_id = Auth::user()->id;
+            $schedule->start = $request->start;
+            $schedule->end = $request->end;
+            $schedule->honorary_note = 'image';
+            $schedule->save();
+
+            if ($schedule) {
+                $image = $this->fileUploadService->upload($request['honorary_note'], Schedule::FILE_STORE_HONORARY_PATH, false, true);
+                $schedule->honorary_note = $image;
+                $schedule->save();
+            }
+
+
             record_updated_flash();
-            return redirect()->route('admin.schedules.index');
+            return redirect()->route('admin.get.anesthesiologist.schedule');
+
         } catch (\Exception $e) {
             return back();
         }

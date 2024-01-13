@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\PractitionerScheduleRequest;
-use Illuminate\Http\Request;
-use App\DataTables\PractitionerScheduleDataTable;
+use App\DataTables\ScheduleDataTableForAdmin;
+use App\DataTables\ScheduleDataTableForAnesthesiologist;
 use App\DataTables\ScheduleDataTableForMedicalPractitioner;
-use App\Http\Requests\ScheduleRequest;
-use App\Models\Schedule;
+use App\Http\Requests\PractitionerScheduleRequest;
 use App\Services\PractitionerScheduleService;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use App\DataTables\ScheduleDataTable;
+use App\Http\Requests\ScheduleRequest;
 use App\Services\Utils\FileUploadService;
+use App\Models\Schedule;
+use App\Services\ScheduleService;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
 class PractitionerScheduleController extends Controller
@@ -22,6 +25,7 @@ class PractitionerScheduleController extends Controller
     public function __construct(PractitionerScheduleService $scheduleService, FileUploadService $fileUploadService)
     {
         $this->scheduleService = $scheduleService;
+        $this->fileUploadService = $fileUploadService;
     }
     /**
      * Display a listing of the resource.
@@ -47,11 +51,12 @@ class PractitionerScheduleController extends Controller
      */
     public function store(PractitionerScheduleRequest $request)
     {
-        //$data = $request->validated();
+//$data = $request->validated();
         //$data['user_id'] = Auth::user()->id;
         try {
+            //$schedule = $this->scheduleService->storeOrUpdate($data, null);
             $schedule = Schedule::create([
-                'user_id'=> Auth::user()->id,
+                'user_id' => Auth::user()->id,
                 'start' => $request['start'],
                 'end' => $request['end'],
                 'anesthesiology_type' => $request['anesthesiology_type'],
@@ -59,26 +64,13 @@ class PractitionerScheduleController extends Controller
             ]);
             if ($schedule) {
                 $image = $this->fileUploadService->upload($request['honorary_note'], Schedule::FILE_STORE_HONORARY_PATH, false, true);
-                dd($image);
                 $schedule->honorary_note = $image;
                 $schedule->save();
             }
-
-             record_created_flash();
-             return redirect()->route('admin.practitioners.index');
-         } catch (\Exception $e) {
-         }
-
-
-
-        // $data = $request->validated();
-        // $data['user_id'] = Auth::user()->id;
-        // try {
-        //     $this->scheduleService->storeOrUpdate($data, null);
-        //     record_created_flash();
-        // } catch (\Exception $e) {
-        // }
-        // return redirect()->route('admin.get.prectitioner.schedule');
+            record_created_flash();
+            return redirect()->route('admin.get.anesthesiologist.schedule');
+        } catch (\Exception $e) {
+        }
     }
 
     /**
@@ -107,17 +99,35 @@ class PractitionerScheduleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(ScheduleRequest $request, string $id)
+    public function update(PractitionerScheduleRequest $request, string $id)
     {
         $data = $request->validated();
         try {
-            $this->scheduleService->storeOrUpdate($data, $id);
+
+            $schedule = Schedule::find($id);
+            $schedule->user_id = Auth::user()->id;
+            $schedule->start = $request->start;
+            $schedule->end = $request->end;
+            $schedule->anesthesiology_type = $request->anesthesiology_type;
+            $schedule->honorary_note = $request->honorary_note;
+            $schedule->save();
+            return $schedule;
+
+            if ($schedule) {
+                $image = $this->fileUploadService->upload($request['honorary_note'], Schedule::FILE_STORE_HONORARY_PATH, false, true);
+                $schedule->honorary_note = $image;
+                $schedule->save();
+            }
+
+
             record_updated_flash();
-            return redirect()->route('admin.schedules.index');
+            return redirect()->route('admin.get.anesthesiologist.schedule');
+
         } catch (\Exception $e) {
             return back();
         }
     }
+
 
     /**
      * Remove the specified resource from storage.

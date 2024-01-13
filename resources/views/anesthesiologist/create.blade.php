@@ -46,7 +46,7 @@
                                         </button>
 
                                         <a class="btn btn-secondary waves-effect"
-                                            href="{{ route('admin.schedules.index') }}">
+                                            href="{{ route('admin.get.anesthesiologist.schedule') }}">
                                             <i class="fa fa-times"></i> Cancel
                                         </a>
                                     </div>

@@ -29,7 +29,6 @@ class User extends Authenticatable
         'first_name',
         'last_name',
         'location',
-        'honorary_note',
         'email',
         'phone',
         'user_type',

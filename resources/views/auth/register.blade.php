@@ -95,26 +95,6 @@
                                     @enderror
                                 </div>
                             </div>
-
-                            <div class="row mb-2">
-                                <label for="honorary_note"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('Honorary Note') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="honorary_note" type="file"
-                                        class="form-control @error('honorary_note') is-invalid @enderror"
-                                        name="honorary_note" value="{{ old('honorary_note') }}"
-                                        autocomplete="honorary_note">
-
-                                    @error('honorary_note')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-
                             <div class="row mb-2">
                                 <label for="user_type"
                                     class="col-md-4 col-form-label text-md-end">{{ __('Join As') }}</label>

@@ -65,7 +65,6 @@ class RegisterController extends Controller
             'phone' => ['required', 'string'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'user_type' => ['required', 'string'],
-            'honorary_note' => ['required', 'mimes:pdf'],
             "anesthesiologist_type" => "required_if:user_type,==,anesthesiologists",
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -89,15 +88,14 @@ class RegisterController extends Controller
                 'location' => $data['location'],
                 'phone' => $data['phone'],
                 'email' => $data['email'],
-                'honorary_note' => 'image',
                 'user_type' => $data['user_type'],
                 'password' => Hash::make($data['password']),
             ]);
 
             if ($user) {
-                $image = $this->fileUploadService->upload($data['honorary_note'], User::FILE_STORE_HONORARY_PATH, false, true);
-                $user->honorary_note = $image;
-                $user->save();
+                // $image = $this->fileUploadService->upload($data['honorary_note'], User::FILE_STORE_HONORARY_PATH, false, true);
+                // $user->honorary_note = $image;
+                // $user->save();
             }
 
              return $user;
@@ -110,16 +108,15 @@ class RegisterController extends Controller
                 'location' => $data['location'],
                 'phone' => $data['phone'],
                 'email' => $data['email'],
-                'honorary_note' => 'image',
                 'user_type' => $data['user_type'],
                 'anesthesiologist_type' =>   $data['anesthesiologist_type'],
                 'password' => Hash::make($data['password']),
             ]);
 
             if ($user) {
-                $image = $this->fileUploadService->upload($data['honorary_note'], User::FILE_STORE_HONORARY_PATH, false, true);
-                $user->honorary_note = $image;
-                $user->save();
+                // $image = $this->fileUploadService->upload($data['honorary_note'], User::FILE_STORE_HONORARY_PATH, false, true);
+                // $user->honorary_note = $image;
+                // $user->save();
             }
 
              return $user;

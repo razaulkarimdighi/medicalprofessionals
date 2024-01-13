@@ -42,9 +42,9 @@
 
                             <div class="mb-3 col-md-4">
                                 <label class="form-label"> Honorary Note <span class="error">*</span></label>
-                                <input type="file" name="honorary_note" class="form-control @error('honorary_note') is-invalid @enderror" autocomplete="honorary_note">
+                                <input type="file" name="honorary_note" class="form-control @error('honor_note') is-invalid @enderror" autocomplete="honor_note">
 
-                                @error('honorary_note')
+                                @error('honor_note')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

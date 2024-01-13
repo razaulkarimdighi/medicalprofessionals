@@ -40,7 +40,7 @@
                     </table>
                     {{-- Show Honorary Note --}}
                     <div class="embed-responsive embed-responsive-16by9">
-                        <iframe class="embed-responsive-item" id="" allowfullscreen>
+                        <iframe src=" " class="embed-responsive-item" id="honor_note" allowfullscreen>
 
                         </iframe>
                     </div>
@@ -204,7 +204,7 @@
                     $('#location').text(calEvent.location);
                     $('#type_of_nesthesiology').text(calEvent.type_of_nesthesiology);
                     $('#user_type').text(calEvent.user_type);
-                    $('#honor_note').text(calEvent.honorary_note);
+                    $('#honor_note').attr('src',  'https://www.youtube.com/results?search_query=how+to+show+video+in+iframe+source+with+jaquery+in+laravel');
                     $('#schedule_id').val(calEvent.schedule_id);
                     $('#scheduleModal2').modal('toggle')
 
