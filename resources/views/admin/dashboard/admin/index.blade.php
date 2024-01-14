@@ -13,7 +13,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <table class="table table-striped">
+                    <table class="table table-striped table-responsive">
                         <thead>
                             <tr>
                                 <th scope="col">Anesthesiologist Name</th>
@@ -128,7 +128,7 @@
             var events = @json($events);
             $('#calendar').fullCalendar({
                 plugins: ['interaction', 'dayGrid', 'timeGrid'],
-                defaultView: 'agendaDay',
+                defaultView: 'basicWeek',
                 slotDuration: '00:15:00', // Each slot represents 15 minutes
                 slotLabelInterval: '01:00:00', // Show time labels every hour
                 aspectRatio: 1.5,

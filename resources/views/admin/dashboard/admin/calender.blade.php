@@ -14,11 +14,11 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <table class="table table-striped">
+                    <table class="table table-striped table-responsive">
                         <thead>
                             <tr>
                                 <th scope="col">Name</th>
-                                <th scope="col">User Type</th>
+                                {{-- <th scope="col">User Type</th> --}}
                                 <th scope="col">Phone</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">Location</th>
@@ -28,7 +28,7 @@
                         <tbody>
                             <tr>
                                 <td id="name"></td>
-                                <td id="user_type"></td>
+                                {{-- <td id="user_type"></td> --}}
                                 <td id="phone"></td>
                                 <td id="email"></td>
                                 <td id="location"></td>
@@ -204,7 +204,7 @@
                     $('#email').text(calEvent.email);
                     $('#location').text(calEvent.location);
                     $('#type_of_anesthesiology').text(calEvent.type_of_anesthesiology);
-                    $('#user_type').text(calEvent.user_type);
+                    //$('#user_type').text(calEvent.user_type);
                     let href = "{{ asset('/storage/file') }}" + "/" + calEvent.honorary_note
                     console.log(href);
                     let honor = $('#honor').attr('src', href);
@@ -335,5 +335,12 @@
         .modal-small {
             width: 30%;
         }
+
+        @media (min-width: 576px) and (max-width: 767.98px) {
+            .modal-dialog {
+            max-width: 100%;
+        }
+        }
+
     </style>
 @endpush

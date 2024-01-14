@@ -100,28 +100,31 @@ class PractitionerScheduleController extends Controller
      */
     public function update(PractitionerScheduleRequest $request, string $id)
     {
+        $data = $request->validated();
+        try {
 
-        $schedule = Schedule::find($id);
-        $schedule->user_id = Auth::user()->id;
-        $schedule->start = $request->start;
-        $schedule->anesthesiology_type = $request->anesthesiology_type;
-        $schedule->end = $request->end;
+            $schedule = Schedule::find($id);
+            $schedule->user_id = Auth::user()->id;
+            $schedule->start = $request->start;
+            $schedule->end = $request->end;
+            $schedule->anesthesiology_type = $request->anesthesiology_type;
+            $schedule->honorary_note = $request->honorary_note;
+            $schedule->save();
 
-        if ($request->hasFile('honorary_note')) {
-
-            $destination = 'storage/file' . $schedule->honorary_note;
-            if (File::exists($destination)) {
-                File::delete($destination);
+            if ($schedule) {
+                $image = $this->fileUploadService->upload($request['honorary_note'], Schedule::FILE_STORE_HONORARY_PATH, false, true);
+                $schedule->honorary_note = $image;
+                $schedule->save();
             }
-            $file = $request->file('honorary_note');
-            $extention = $file->getClientOriginalExtension();
-            $filename = time() . '.' . $extention;
-            $file->move('storage/file/', $filename);
-            $schedule->honorary_note = $filename;
+
+
+            record_updated_flash();
+            return redirect()->route('admin.practitioners.index');
+
+        } catch (\Exception $e) {
+            return back();
         }
-        $schedule->save();
-        record_updated_flash();
-        return redirect()->route('admin.get.anesthesiologist.schedule');
+
 
     }
 

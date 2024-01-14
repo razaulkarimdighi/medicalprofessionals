@@ -14,7 +14,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <table class="table table-striped">
+                    <table class="table table-striped table-responsive">
                         <thead>
                             <tr>
                                 <th scope="col">Full Name</th>

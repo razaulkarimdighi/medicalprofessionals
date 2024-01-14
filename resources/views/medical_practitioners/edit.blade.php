@@ -7,7 +7,7 @@
                 <div class="card-body">
                     <h4 class="card-title mb-3">{{get_page_meta('title', true)}}</h4>
 
-                    <form action="{{ route('admin.practitioners.update',$schedule->id) }}" method="post">
+                    <form action="{{ route('admin.practitioners.update',$schedule->id) }}" method="post" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
 
