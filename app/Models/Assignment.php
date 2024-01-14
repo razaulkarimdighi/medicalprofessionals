@@ -12,6 +12,7 @@ class Assignment extends Model
     protected $fillable = [
         'anesthesiologist_id',
         'practicioner_id',
+        'schedule_id',
         'start',
         'end'
     ];
@@ -25,6 +26,11 @@ class Assignment extends Model
     {
         return $this->belongsTo(User::class,'anesthesiologist_id');
     }
+    public function schedule()
+    {
+        return $this->belongsTo(Schedule::class, 'schedule_id');
+    }
+
 
 
 }

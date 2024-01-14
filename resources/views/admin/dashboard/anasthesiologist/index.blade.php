@@ -37,6 +37,16 @@
                             </tr>
                         </tbody>
                     </table>
+
+                     {{-- Show Honorary Note --}}
+                     <div class="embed-responsive embed-responsive-16by9">
+                        {{-- <iframe src="" class="embed-responsive-item" id="honor_note" allowfullscreen>
+
+                        </iframe> --}}
+                        <iframe src="" class="embed-responsive-item" id="honor"  width="300" height="500">
+
+                        </iframe>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary close_btn" data-dismiss="modal">Close</button>
@@ -221,6 +231,10 @@
                     $('#phone').text(calEvent.phone);
                     $('#email').text(calEvent.email);
                     $('#location').text(calEvent.location);
+                    let href = "{{ asset('/storage/file') }}" + "/" + calEvent.honorary_note
+                    console.log(href);
+                    let honor = $('#honor').attr('src', href);
+                    console.log(honor);
 
                     // console.log(jsEvent),
                     // console.log(view),

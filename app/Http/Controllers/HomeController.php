@@ -68,6 +68,7 @@ class HomeController extends Controller
                     'location' => $schedule->practicioner->location,
                     'phone' => $schedule->practicioner->phone,
                     'email' => $schedule->practicioner->email,
+                    'honorary_note' => $schedule->schedule->honorary_note,
                 ];
             }
             return view('admin.dashboard.anasthesiologist.index', compact('events','schedules','user_schedules','notAssignedSchedule','assignedSchedule'));
@@ -85,7 +86,9 @@ class HomeController extends Controller
                     'end' => $schedule->end,
                     'location' => $schedule->anesthesiologist->location,
                     'phone' => $schedule->anesthesiologist->phone,
+                    'type_of_anesthesiology' => $schedule->anesthesiologist->anesthesiologist_type,
                     'email' => $schedule->anesthesiologist->email,
+                    'honorary_note' => $schedule->schedule->honorary_note,
                 ];
             }
             return view('admin.dashboard.medical.index', compact('events','schedules','user_schedules','notAssignedSchedule','assignedSchedule'));

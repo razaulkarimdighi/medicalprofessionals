@@ -54,6 +54,7 @@ class AssignAnesthesiologistController extends Controller
             $ass = [
                 'anesthesiologist_id' => $data['anesthesiologist_id'],
                 'practicioner_id' => $data['practicioner_id'],
+                'schedule_id' => $data['schedule'],
                 'start' => $schedule->start,
                 'end' => $schedule->end,
             ];

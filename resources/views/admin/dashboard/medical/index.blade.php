@@ -4,7 +4,7 @@
 @section('content')
     <div class="modal fade" id="scheduleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Details</h5>
@@ -22,6 +22,7 @@
                                 <th scope="col">Phone</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">Location</th>
+                                <th scope="col">Type of Anesthesiology</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -32,10 +33,21 @@
                                 <td id="phone"></td>
                                 <td id="email"></td>
                                 <td id="location"></td>
+                                <td id="type_of_anesthesiology"></td>
 
                             </tr>
                         </tbody>
                     </table>
+
+                     {{-- Show Honorary Note --}}
+                     <div class="embed-responsive embed-responsive-16by9">
+                        {{-- <iframe src="" class="embed-responsive-item" id="honor_note" allowfullscreen>
+
+                        </iframe> --}}
+                        <iframe src="" class="embed-responsive-item" id="honor"  width="300" height="500">
+
+                        </iframe>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary close_btn" data-dismiss="modal">Close</button>
@@ -152,6 +164,9 @@
         body {
             background-color: #f8f8fa;
         }
+        .modal-dialog {
+            max-width: 80%;
+        }
     </style>
 @endpush
 
@@ -207,7 +222,11 @@
                     $('#end').text(new Date(calEvent.end).toLocaleString('en-US', options));
                     $('#phone').text(calEvent.phone);
                     $('#email').text(calEvent.email);
+                    $('#type_of_anesthesiology').text(calEvent.type_of_anesthesiology);
                     $('#location').text(calEvent.location);
+                    let href = "{{ asset('/storage/file') }}" + "/" + calEvent.honorary_note
+                    console.log(href);
+                    let honor = $('#honor').attr('src', href);
 
                     // console.log(jsEvent),
                     // console.log(view),

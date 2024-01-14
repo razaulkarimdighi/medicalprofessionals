@@ -15,6 +15,7 @@ use App\Models\Schedule;
 use App\Services\ScheduleService;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Illuminate\Support\Facades\File;
 
 class PractitionerScheduleController extends Controller
 {
@@ -43,7 +44,6 @@ class PractitionerScheduleController extends Controller
     {
         set_page_meta('Create Schedule');
         return view('medical_practitioners.create');
-
     }
 
     /**
@@ -51,7 +51,7 @@ class PractitionerScheduleController extends Controller
      */
     public function store(PractitionerScheduleRequest $request)
     {
-//$data = $request->validated();
+        //$data = $request->validated();
         //$data['user_id'] = Auth::user()->id;
         try {
             //$schedule = $this->scheduleService->storeOrUpdate($data, null);
@@ -68,7 +68,7 @@ class PractitionerScheduleController extends Controller
                 $schedule->save();
             }
             record_created_flash();
-            return redirect()->route('admin.get.anesthesiologist.schedule');
+            return redirect()->route('admin.practitioners.index');
         } catch (\Exception $e) {
         }
     }
@@ -93,7 +93,6 @@ class PractitionerScheduleController extends Controller
         } catch (\Exception $e) {
             log_error($e);
         }
-        return back();
     }
 
     /**
@@ -101,29 +100,29 @@ class PractitionerScheduleController extends Controller
      */
     public function update(PractitionerScheduleRequest $request, string $id)
     {
-        $data = $request->validated();
-        try {
 
-            $schedule = Schedule::find($id);
-            $schedule->user_id = Auth::user()->id;
-            $schedule->start = $request->start;
-            $schedule->end = $request->end;
-            $schedule->honorary_note = 'image';
-            $schedule->save();
+        $schedule = Schedule::find($id);
+        $schedule->user_id = Auth::user()->id;
+        $schedule->start = $request->start;
+        $schedule->anesthesiology_type = $request->anesthesiology_type;
+        $schedule->end = $request->end;
 
-            if ($schedule) {
-                $image = $this->fileUploadService->upload($request['honorary_note'], Schedule::FILE_STORE_HONORARY_PATH, false, true);
-                $schedule->honorary_note = $image;
-                $schedule->save();
+        if ($request->hasFile('honorary_note')) {
+
+            $destination = 'storage/file' . $schedule->honorary_note;
+            if (File::exists($destination)) {
+                File::delete($destination);
             }
-
-
-            record_updated_flash();
-            return redirect()->route('admin.get.anesthesiologist.schedule');
-
-        } catch (\Exception $e) {
-            return back();
+            $file = $request->file('honorary_note');
+            $extention = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extention;
+            $file->move('storage/file/', $filename);
+            $schedule->honorary_note = $filename;
         }
+        $schedule->save();
+        record_updated_flash();
+        return redirect()->route('admin.get.anesthesiologist.schedule');
+
     }
 
 
@@ -143,15 +142,16 @@ class PractitionerScheduleController extends Controller
 
 
     //Show all schedule to admin;
-    public function showAllSchedule(){
-        $events = Array();
+    public function showAllSchedule()
+    {
+        $events = array();
         $schedules = Schedule::all();
-        foreach($schedules as $schedule){
-            $events[]=[
-                      'title' => $schedule->user->first_name.' '.$schedule->user->last_name,
-                      'start' => $schedule->start,
-                      'end' => $schedule->end
-                    ];
+        foreach ($schedules as $schedule) {
+            $events[] = [
+                'title' => $schedule->user->first_name . ' ' . $schedule->user->last_name,
+                'start' => $schedule->start,
+                'end' => $schedule->end
+            ];
         }
 
         set_page_meta('Schedule');
