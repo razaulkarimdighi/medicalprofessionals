@@ -108,10 +108,8 @@ class PractitionerScheduleController extends Controller
             $schedule->user_id = Auth::user()->id;
             $schedule->start = $request->start;
             $schedule->end = $request->end;
-            $schedule->anesthesiology_type = $request->anesthesiology_type;
-            $schedule->honorary_note = $request->honorary_note;
+            $schedule->honorary_note = 'image';
             $schedule->save();
-            return $schedule;
 
             if ($schedule) {
                 $image = $this->fileUploadService->upload($request['honorary_note'], Schedule::FILE_STORE_HONORARY_PATH, false, true);

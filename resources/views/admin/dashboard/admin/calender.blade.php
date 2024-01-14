@@ -23,7 +23,6 @@
                                 <th scope="col">Email</th>
                                 <th scope="col">Location</th>
                                 <th scope="col">Type of Anesthesiology</th>
-                                <th scope="col">Honorary Note</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -33,14 +32,16 @@
                                 <td id="phone"></td>
                                 <td id="email"></td>
                                 <td id="location"></td>
-                                <td id="type_of_nesthesiology"></td>
-                                <td id="honor_note"></td>
+                                <td id="type_of_anesthesiology"></td>
                             </tr>
                         </tbody>
                     </table>
                     {{-- Show Honorary Note --}}
                     <div class="embed-responsive embed-responsive-16by9">
-                        <iframe src=" " class="embed-responsive-item" id="honor_note" allowfullscreen>
+                        {{-- <iframe src="" class="embed-responsive-item" id="honor_note" allowfullscreen>
+
+                        </iframe> --}}
+                        <iframe src="" class="embed-responsive-item" id="honor"  width="300" height="500">
 
                         </iframe>
                     </div>
@@ -202,9 +203,12 @@
                     $('#phone').text(calEvent.phone);
                     $('#email').text(calEvent.email);
                     $('#location').text(calEvent.location);
-                    $('#type_of_nesthesiology').text(calEvent.type_of_nesthesiology);
+                    $('#type_of_anesthesiology').text(calEvent.type_of_anesthesiology);
                     $('#user_type').text(calEvent.user_type);
-                    $('#honor_note').attr('src',  'https://www.youtube.com/results?search_query=how+to+show+video+in+iframe+source+with+jaquery+in+laravel');
+                    let href = "{{ asset('/storage/file') }}" + "/" + calEvent.honorary_note
+                    console.log(href);
+                    let honor = $('#honor').attr('src', href);
+                    console.log(honor);
                     $('#schedule_id').val(calEvent.schedule_id);
                     $('#scheduleModal2').modal('toggle')
 

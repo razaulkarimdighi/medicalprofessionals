@@ -26,7 +26,7 @@ class PractitionerScheduleDataTable extends DataTable
         return (new EloquentDataTable($query))
             ->addColumn('action', function ($item) {
                 $buttons = '';
-                    $buttons .= '<a class="dropdown-item" href="' . route('admin.schedules.edit', $item->id) . '" title="Edit"><i class="mdi mdi-square-edit-outline"></i> Edit </a>';
+                    $buttons .= '<a class="dropdown-item" href="' . route('admin.practitioners.edit', $item->id) . '" title="Edit"><i class="mdi mdi-square-edit-outline"></i> Edit </a>';
 
                 // TO-DO: need to chnage the super admin ID to 1, while Super admin ID will 1
                         $buttons .= '<form action="' . route('admin.schedules.destroy', $item->id) . '"  id="delete-form-' . $item->id . '" method="post" style="">

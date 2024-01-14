@@ -97,7 +97,7 @@ class HonoraryNoteController extends Controller
             return response()->json($response);
         } else {
             $filename = time() . '.' . $request->file->extension();
-            $request->file->move(public_path('file'), $filename);
+            $request->file->move(public_path('storage/file'), $filename);
             $schedule = Schedule::find($request->schedule_id);
             $schedule->honorary_note = $filename;
             $schedule->save();

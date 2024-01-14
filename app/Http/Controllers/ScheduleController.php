@@ -153,7 +153,7 @@ class ScheduleController extends Controller
                     'phone' => $schedule->user->phone,
                     'email' => $schedule->user->email,
                     'location' => $schedule->user->location,
-                    'type_of_nesthesiology' => $schedule->anesthesiology_type,
+                    'type_of_anesthesiology' => $schedule->anesthesiology_type,
                     'schedule_id' => $schedule->id,
                     'honorary_note' => $schedule->honorary_note,
                     // 'anesthesiologist_name' => $schedule->anesthesiologist->first_name .' '.$schedule->anesthesiologist->last_name,
