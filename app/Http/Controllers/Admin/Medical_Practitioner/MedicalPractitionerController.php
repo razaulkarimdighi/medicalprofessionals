@@ -86,12 +86,12 @@ class MedicalPractitionerController extends Controller
         //$data['user_type'] = User::USER_TYPE_MEDICAL_PRACTICES;
         $this->userService->storeOrUpdate($data, $id);
             record_updated_flash();
+            return redirect()->route('admin.medical_practitioners.index');
         try {
             // $this->userService->storeOrUpdate($data, null);
             // record_created_flash();
         } catch (\Exception $e) {
         }
-        return redirect()->route('admin.medical_practitioners.index');
     }
 
     /**
